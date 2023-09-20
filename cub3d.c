@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:42:44 by arecce            #+#    #+#             */
-/*   Updated: 2023/09/10 22:07:46 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/09/18 17:37:02 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,24 +84,14 @@ int	key(int keycode, t_scene *s)
 
 int isPositionValid(t_scene *s, double x, double y)
 {
-    int mapX = (int)(x / 64); // Converti le coordinate in pixel in coordinate della mappa
+    int mapX = (int)(x / 64);
     int mapY = (int)(y / 64);
 
-    // Verifica se la nuova posizione è all'interno dei limiti della mappa
-    if (mapX < 0 || mapX >= s->f.map_x || mapY < 0 || mapY >= s->f.map_y)
-    {
-        return 0; // Posizione fuori dai limiti della mappa
-    }
-
-    // Verifica se la nuova posizione è su un muro (49 rappresenta un muro, adatta il valore in base alla tua mappa)
-    if (s->f.map[mapY][mapX] == 49)
-    {
-        return 0; // Posizione su un muro
-    }
-
-    return 1; // La posizione è valida
+    if ((mapX < 0 || mapX >= s->f.map_x || mapY < 0 || mapY >= s->f.map_y)
+		|| (s->f.map[mapY][mapX] == 49))
+        return 0;
+    return (1);
 }
-
 
 int mov(t_scene *s)
 {
@@ -110,14 +100,14 @@ int mov(t_scene *s)
 	// drawLine(s, 0, 30, 0x00000000);
 	if (s->pg.press_la) //s->pg.pos_x -= 0.05;
 	{
-		s->pg.pa += 0.5;
+		s->pg.pa += 0.7;
 		s->pg.pa = fixAng(s->pg.pa);
 		s->pg.pdx = cos(degToRad(s->pg.pa));
 		s->pg.pdy = -sin(degToRad(s->pg.pa));
 	}
 	if (s->pg.press_ra) //s->pg.pos_x += 0.05;
 	{
-		s->pg.pa -= 0.5;
+		s->pg.pa -= 0.7;
 		s->pg.pa = fixAng(s->pg.pa);
 		s->pg.pdx = cos(degToRad(s->pg.pa));
 		s->pg.pdy = -sin(degToRad(s->pg.pa));
