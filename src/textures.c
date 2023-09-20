@@ -80,6 +80,8 @@ void	save_char_color(t_scene *s, char *tmp, int i)
 	// ft_printf("%d\n", ft_atoi(s->t.n_col[i][1]));
 }
 
+
+
 int	pixel_color(t_scene *s, char *file)
 {
 	int		fd;
@@ -89,7 +91,7 @@ int	pixel_color(t_scene *s, char *file)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		ft_perror("Impossibile leggere il file .xpm");
-	i = 4;
+	i = 3;
 	while (i--)
 		get_next_line(fd);
 	s->t.n_col = malloc(sizeof(char ***) * 104);

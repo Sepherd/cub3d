@@ -2,20 +2,13 @@
 
 void	drawWalls(t_scene *s, int	y1, int y2, int color)
 {
-	int	x1 = s->r.rr * (s->screenX / 640);
-	int	x2 = x1 + (s->screenX / 640);
-	int i = x1;
+	int	k;
 
-	while (i <= x2)
-	{
-		int k = y2 - y1;
-		if (k <= 0)
-			k = 1;
-		// ft_printf("I %d K %d\n", i, k);
-		while (k--)
-			my_mlx_pixel_put(s, i, y1 + k, color);
-		i++;
-	}
+	k = y2 - y1;
+	if (k <= 0)
+		k = 1;
+	while (k--)
+		my_mlx_pixel_put(s, s->r.rr, y1 + k, color);
 }
 
 int hexStringToInt(char *hexString)
@@ -84,17 +77,17 @@ int hexStringToInt(char *hexString)
 // 	}
 // }
 
-void walls(t_scene *s, int x, int y, int lineH, double ty_off, int texIndex)
+void walls(t_scene *s, int x, int y, int lineH, double ty_off)
 {
-	// (void)texIndex;
-	// (void)ty_off;
-	ty_off = lineH / 2 + s->screenY / 2;
-	if (ty_off > s->screenY)
-		ty_off = s->screenY;
-	double	ty_step = 1.0 * 64.0 / (double)lineH;
-	double	texPos = (y - s->screenY / 2 + lineH / 2) * ty_step;
-	// int texX = texIndex; // L'indice della colonna del pixel nella texture
-	int	tx = 0;
+	double	ty_step;
+	double	texPos;
+	int		tx;
+	int		color;
+	int		index;
+
+	ty_step = 1.0 * 64.0 / (double)lineH;
+	texPos = (y - s->screenY / 2 + lineH / 2) * ty_step;
+	tx = 0;
 	if (s->r.shade == 1)
 	{
 		tx = ((int)(s->r.rx/2.0))%64;
@@ -107,20 +100,15 @@ void walls(t_scene *s, int x, int y, int lineH, double ty_off, int texIndex)
 		if (s->r.ra > 90 && s->r.ra < 270)
 			tx = 64 - tx - 1;
 	}
-	(void)x;
 	while (y < ty_off)
 	{
 		int texY = (int)texPos & (64 - 1);
 		texPos += ty_step;
-		texIndex = 64 * texY + tx;
-		// if (texIndex > 64 * 64)
-		// 	texIndex = (texIndex % 64) - 1;
-		int color = s->t.n_arr_col[texIndex];
-		if (s->r.shade == 0)
-			color = (color >> 1) & 8355711;
+		index = 64 * texY + tx;
+		color = s->t.n_arr_col[index];
+		// if (s->r.shade == 0)
+		// 	color = (color >> 1) & 8355711;
 		my_mlx_pixel_put(s, x, y, color);
-		// if (i == lineH - 1)
-		// 	printf("index %d\n", (int)texY * 64);
 		y++;
 	}
 }

@@ -58,6 +58,7 @@ typedef struct	s_textures
 {
 	char	***n_col;
 	char	***n_pxl;
+	int		tot_col;
 	int		*n_arr_col;
 	int		n_i;
 	int		*order_col;
@@ -200,7 +201,7 @@ void	drawLine(t_scene *s, int ex, int ey, int color);
 // void	drawWalls(t_scene *s, int x0, int y0, int x1, int y1, int color);
 void	drawWalls(t_scene *s, int	y1, int y2, int color);
 // void	walls(t_scene *s, int	y1, int y2);
-void walls(t_scene *s, int x, int y, int lineH, double ty_off, int texIndex);
+void walls(t_scene *s, int x, int y, int lineH, double ty_off);
 
 	/***** RAY *****/
 double 	degToRad(double a);

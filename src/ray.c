@@ -147,10 +147,14 @@ void	draw_rays(t_scene *s)
 			s->r.ry = s->r.vy;
 			s->r.disH = s->r.disV;
 		}
+		(void)hmt;
 		int	ca = fixAng(s->r.ra - s->pg.pa);
 		s->r.disH = s->r.disH * cos(degToRad(ca));
 		int	lineH = 64 * s->screenY / s->r.disH;
 		double	ty_off = 0;
+		ty_off = lineH / 2 + s->screenY / 2;
+		if (ty_off > s->screenY)
+			ty_off = s->screenY;
 		// if (lineH > s->screenY)
 		// 	lineH = s->screenY;
 		int	lineOff = -lineH / 2 + s->screenY / 2;
@@ -158,12 +162,7 @@ void	draw_rays(t_scene *s)
 			lineOff = 0;
 		drawWalls(s, 0, s->screenY / 2, 0x00FF00);
 		drawWalls(s, (s->screenY / 2) + 1, s->screenY, 0x0000FF);
-		int x1 = s->r.rr * (s->screenX / 640);
-		for (int col = 0; col < (s->screenX / 640); col++)
-		{
-			walls(s, x1, lineOff, lineH, ty_off, hmt);
-			x1++;
-		}
+		walls(s, s->r.rr, lineOff, lineH, ty_off);
 		// drawLine(s, s->r.rx, s->r.ry, 0x00FF0000);
 		s->r.ra = fixAng(s->r.ra - 0.1);
 		s->r.rr++;

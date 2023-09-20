@@ -32,8 +32,8 @@ UNAME = $(shell uname)
 LIB = libmlx.dylib
 
 # LIBS = -framework OpenGL -lm -framework AppKit
-LIBS_L = -lm -L/usr/X11R6/lib -lmlx -lXext -lX11
-# LIBS_L = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz #scuola
+# LIBS_L = -lm -L/usr/X11R6/lib -lmlx -lXext -lX11
+LIBS_L = -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz #scuola
 
 GREEN = \033[1;32m
 RED = \033[1;31m
