@@ -86,7 +86,7 @@ void walls(t_scene *s, int x, int y, int lineH, double ty_off)
 	int		index;
 
 	ty_step = 1.0 * 64.0 / (double)lineH;
-	texPos = (y - s->screenY / 2 + lineH / 2) * ty_step;
+	texPos = (y - SCREEN_Y / 2 + lineH / 2) * ty_step;
 	tx = 0;
 	if (s->r.shade == 1)
 	{

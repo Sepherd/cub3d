@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:42:44 by arecce            #+#    #+#             */
-/*   Updated: 2023/09/22 16:28:14 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/09/23 00:05:13 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,10 +189,10 @@ int	main(int ac, char **av)
 		// ft_printf("x %d y %d\n", s.f.map_x, s.f.map_y);
 		s.mlx = mlx_init();
 		// ft_printf("MAPX %d - MAPY %d\n", s.f.map_x, s.f.map_y);
-		s.win = mlx_new_window(s.mlx, s.screenX, s.screenY, "CUB3D");
+		s.win = mlx_new_window(s.mlx, SCREEN_X, SCREEN_Y, "CUB3D");
 		// s.pg.pos_x = 400;
 		// s.pg.pos_y = 300;
-		s.img = mlx_new_image(s.mlx, s.screenX, s.screenY);
+		s.img = mlx_new_image(s.mlx, SCREEN_X, SCREEN_Y);
 		s.addr = mlx_get_data_addr(s.img, &s.bits_per_pixel, &s.line_length, &s.endian);
 		// my_mlx_pixel_put(&s, s.pg.pos_x, s.pg.pos_y, 0x00FF0000);
 		// drawMap(&s);

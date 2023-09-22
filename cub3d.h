@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:42:48 by arecce            #+#    #+#             */
-/*   Updated: 2023/09/22 21:08:34 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/09/23 00:05:19 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@
 # define C_ID "C"
 # define TEX_X 64
 # define TEX_Y 64
+# define SCREEN_X 640
+# define SCREEN_Y 640
 
 
 // typedef struct s_display
@@ -159,8 +161,8 @@ typedef struct	s_scene
 	void		*so_wall;
 	void		*ea_wall;
 	void		*we_wall;
-	int			screenX;
-	int			screenY;
+	// int			screenX;
+	// int			screenY;
 	// t_display	d;
 	t_textures	t;
 	t_pg		pg;

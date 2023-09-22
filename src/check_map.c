@@ -21,7 +21,8 @@ void	map_to_array(t_scene *s)
 				s->f.arr_map[i] = 0;
 			else if (s->f.map[y][x] == 49)
 				s->f.arr_map[i] = 1;
-			else if (s->f.map[y][x] == 'N')
+			else if (s->f.map[y][x] == 'N' || s->f.map[y][x] == 'S' \
+				|| s->f.map[y][x] == 'E' || s->f.map[y][x] == 'W')
 				s->f.arr_map[i] = 0;
 			i++;
 			x++;
@@ -42,10 +43,8 @@ void	save_pg_position(t_scene *s, char direction, int i, int k)
 		s->pg.pa = 180;
 	s->pg.pdx = cos(degToRad(s->pg.pa));
 	s->pg.pdy = -sin(degToRad(s->pg.pa));
-	// s->pg.dir = direction;
-	s->pg.pos_x = k * 64; //valutare grandezza pixel se necessario
+	s->pg.pos_x = k * 64;
 	s->pg.pos_y = i * 64;
-	// ft_printf("x = %d - y = %d\n", s->pg.pos_x, s->pg.pos_y);
 }
 
 int	map_line_check(t_scene *s)
@@ -85,8 +84,8 @@ int	map_line_check(t_scene *s)
 	}
 	s->f.map_y = s->f.m_size;
 	map_to_array(s);
-	s->screenX = s->f.map_x * 64;
-	s->screenY = s->f.map_y * 64;
+	// s->screenX = s->f.map_x * 64;
+	// s->screenY = s->f.map_y * 64;
 	// ft_printf("TOT = %d\n", s->f.tot);
 	return (1);
 }

@@ -55,7 +55,7 @@ void	draw_rays(t_scene *s)
 		//VERTICAL
 		s->r.disV = 100000;
 		s->r.dof = 0;
-		rtan = tan(degToRad(s->r.ra));//0.5
+		rtan = tan(degToRad(s->r.ra));
 		if (cos(degToRad(s->r.ra)) > 0.001)
 		{
 			s->r.rx = (((int)s->pg.pos_x >> 6) << 6) + 64;
@@ -74,7 +74,7 @@ void	draw_rays(t_scene *s)
 		{
 			s->r.rx = s->pg.pos_x;
 			s->r.ry = s->pg.pos_y;
-			s->r.dof = dof_min; // valore più basso tra altezza e lunghezza mappa
+			s->r.dof = dof_min;
 		}
 		while (s->r.dof < dof_min)
 		{
@@ -118,7 +118,7 @@ void	draw_rays(t_scene *s)
 		{
 			s->r.rx = s->pg.pos_x;
 			s->r.ry = s->pg.pos_y;
-			s->r.dof = dof_min; // valore più basso tra altezza e lunghezza mappa
+			s->r.dof = dof_min;
 		}
 		while (s->r.dof < dof_min)
 		{
@@ -141,17 +141,10 @@ void	draw_rays(t_scene *s)
 		s->r.shade = 1;
 		if (s->r.disV < s->r.disH)
 		{
-		    // Il muro è a nord o sud
 		    if (cos(degToRad(s->r.ra)) > 0)
-		    {
-		        // Muro a ovest (sul lato destro del giocatore)
 		        s->r.wall_side = 'E';
-		    }
 		    else
-		    {
-		        // Muro a est (sul lato sinistro del giocatore)
 		        s->r.wall_side = 'W';
-		    }
 		    hmt = vmt;
 		    s->r.shade = 0;
 		    s->r.rx = s->r.vx;
@@ -160,33 +153,26 @@ void	draw_rays(t_scene *s)
 		}
 		else
 		{
-		    // Il muro è a est o ovest
 		    if (sin(degToRad(s->r.ra)) > 0)
-		    {
-		        // Muro a sud (sopra il giocatore)
 		        s->r.wall_side = 'N';
-		    }
 		    else
-		    {
-		        // Muro a nord (sotto il giocatore)
 		        s->r.wall_side = 'S';
-		    }
 		}
 		(void)hmt;
 		int	ca = fixAng(s->r.ra - s->pg.pa);
 		s->r.disH = s->r.disH * cos(degToRad(ca));
-		int	lineH = 64 * s->screenY / s->r.disH;
+		int	lineH = 64 * SCREEN_Y / s->r.disH;
 		double	ty_off = 0;
-		ty_off = lineH / 2 + s->screenY / 2;
-		if (ty_off > s->screenY)
-			ty_off = s->screenY;
+		ty_off = lineH / 2 + SCREEN_Y / 2;
+		if (ty_off > SCREEN_Y)
+			ty_off = SCREEN_Y;
 		// if (lineH > s->screenY)
 		// 	lineH = s->screenY;
-		int	lineOff = -lineH / 2 + s->screenY / 2;
+		int	lineOff = -lineH / 2 + SCREEN_Y / 2;
 		if (lineOff < 0)
 			lineOff = 0;
-		drawWalls(s, 0, s->screenY / 2, 0x00FF00);
-		drawWalls(s, (s->screenY / 2) + 1, s->screenY, 0x0000FF);
+		drawWalls(s, 0, SCREEN_X / 2, 0x00FF00);
+		drawWalls(s, (SCREEN_Y / 2) + 1, SCREEN_Y, 0x0000FF);
 		walls(s, s->r.rr, lineOff, lineH, ty_off);
 		// drawLine(s, s->r.rx, s->r.ry, 0x00FF0000);
 		s->r.ra = fixAng(s->r.ra - 0.1);
