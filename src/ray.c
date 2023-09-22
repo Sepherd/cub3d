@@ -141,11 +141,36 @@ void	draw_rays(t_scene *s)
 		s->r.shade = 1;
 		if (s->r.disV < s->r.disH)
 		{
-			hmt = vmt;
-			s->r.shade = 0;
-			s->r.rx = s->r.vx;
-			s->r.ry = s->r.vy;
-			s->r.disH = s->r.disV;
+		    // Il muro è a nord o sud
+		    if (cos(degToRad(s->r.ra)) > 0)
+		    {
+		        // Muro a ovest (sul lato destro del giocatore)
+		        s->r.wall_side = 'E';
+		    }
+		    else
+		    {
+		        // Muro a est (sul lato sinistro del giocatore)
+		        s->r.wall_side = 'W';
+		    }
+		    hmt = vmt;
+		    s->r.shade = 0;
+		    s->r.rx = s->r.vx;
+		    s->r.ry = s->r.vy;
+		    s->r.disH = s->r.disV;
+		}
+		else
+		{
+		    // Il muro è a est o ovest
+		    if (sin(degToRad(s->r.ra)) > 0)
+		    {
+		        // Muro a sud (sopra il giocatore)
+		        s->r.wall_side = 'N';
+		    }
+		    else
+		    {
+		        // Muro a nord (sotto il giocatore)
+		        s->r.wall_side = 'S';
+		    }
 		}
 		(void)hmt;
 		int	ca = fixAng(s->r.ra - s->pg.pa);

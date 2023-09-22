@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:42:48 by arecce            #+#    #+#             */
-/*   Updated: 2023/09/22 17:45:45 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/09/22 21:08:34 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_ray
 	double	vy;
 	double	disT;
 	double	shade;
+	char	wall_side;
 }				t_ray;
 
 

@@ -105,7 +105,14 @@ void walls(t_scene *s, int x, int y, int lineH, double ty_off)
 		int texY = (int)texPos & (64 - 1);
 		texPos += ty_step;
 		index = 64 * texY + tx;
-		color = s->t.we_tex[index];
+		if (s->r.wall_side == 'E')
+			color = s->t.ea_tex[index];
+		else if (s->r.wall_side == 'W')
+			color = s->t.we_tex[index];
+		else if (s->r.wall_side == 'S')
+			color = s->t.so_tex[index];
+		else if (s->r.wall_side == 'N')
+			color = s->t.no_tex[index];
 		// if (s->r.shade == 0)
 		// 	color = (color >> 1) & 8355711;
 		my_mlx_pixel_put(s, x, y, color);
