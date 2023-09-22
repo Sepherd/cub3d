@@ -87,7 +87,7 @@ int	save_texture_path(t_scene *s, char *tmp, int id)
 		s->f.no_path = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
 		ft_strncpy(s->f.no_path, tmp, ft_strlen(tmp));
 		s->no_wall = mlx_xpm_file_to_image(s->mlx, "../img/no_wall.xpm", &c, &c);
-		pixel_color(s, tmp);
+		save_textures(s, id, tmp);
 		s->f.no_on = 1;
 	}
 	else if (id == 1 && open(tmp, O_RDONLY) > 0)
@@ -95,6 +95,7 @@ int	save_texture_path(t_scene *s, char *tmp, int id)
 		s->f.so_path = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
 		ft_strncpy(s->f.so_path, tmp, ft_strlen(tmp));
 		s->so_wall = mlx_xpm_file_to_image(s->mlx, "../img/so_wall.xpm", &c, &c);
+		save_textures(s, id, tmp);
 		s->f.so_on = 1;
 	}
 	else if (id == 2 && open(tmp, O_RDONLY) > 0)
@@ -102,6 +103,7 @@ int	save_texture_path(t_scene *s, char *tmp, int id)
 		s->f.ea_path = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
 		ft_strncpy(s->f.ea_path, tmp, ft_strlen(tmp));
 		s->ea_wall = mlx_xpm_file_to_image(s->mlx, "../img/ea_wall.xpm", &c, &c);
+		save_textures(s, id, tmp);
 		s->f.ea_on = 1;
 	}
 	else if (id == 3 && open(tmp, O_RDONLY) > 0)
@@ -109,6 +111,7 @@ int	save_texture_path(t_scene *s, char *tmp, int id)
 		s->f.we_path = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
 		ft_strncpy(s->f.we_path, tmp, ft_strlen(tmp));
 		s->we_wall = mlx_xpm_file_to_image(s->mlx, "../img/we_wall.xpm", &c, &c);
+		save_textures(s, id, tmp);
 		s->f.we_on = 1;
 	}
 	else

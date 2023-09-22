@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:42:48 by arecce            #+#    #+#             */
-/*   Updated: 2023/09/11 00:37:42 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/09/22 17:45:45 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,14 @@
 
 typedef struct	s_textures
 {
-	char	***n_col;
-	char	***n_pxl;
+	char	***temp_color;
+	char	***temp_pixel;
 	int		tot_col;
-	int		*n_arr_col;
-	int		n_i;
+	int		*no_tex;
+	int		*so_tex;
+	int		*ea_tex;
+	int		*we_tex;
+	int		index;
 	int		*order_col;
 }				t_textures;
 
@@ -186,7 +189,7 @@ int		copy_map(t_scene *s, int i);
 int		border_check(t_scene *s);
 
 /***** TEXTURES *****/
-int		pixel_color(t_scene *s, char *file);
+int		save_textures(t_scene *s, int id, char *file);
 
 /***** DRAW *****/
 void	draw_square(t_scene *s, int x, int y, int lt, int color);

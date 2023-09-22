@@ -68,7 +68,7 @@ int hexStringToInt(char *hexString)
 // 			if (tY > 63)
 // 				tY = 63;
 // 			// ft_printf("%d\n", tY * 64 + i);
-// 			int color = s->t.n_arr_col[tY * 64 + i];
+// 			int color = s->t.no_tex[tY * 64 + i];
 // 			// ft_printf("%d\n", color);
 // 			my_mlx_pixel_put(s, i, y1 + k, color);
 // 			k++;
@@ -105,7 +105,7 @@ void walls(t_scene *s, int x, int y, int lineH, double ty_off)
 		int texY = (int)texPos & (64 - 1);
 		texPos += ty_step;
 		index = 64 * texY + tx;
-		color = s->t.n_arr_col[index];
+		color = s->t.we_tex[index];
 		// if (s->r.shade == 0)
 		// 	color = (color >> 1) & 8355711;
 		my_mlx_pixel_put(s, x, y, color);
@@ -171,7 +171,7 @@ void	draw_square(t_scene *s, int x, int y, int lt, int color)
 		while (w < lt)
 		{
 			// ft_printf("H %d W %d\n", h, w);
-			my_mlx_pixel_put(s, x + h, y + w, s->t.n_arr_col[i]);
+			my_mlx_pixel_put(s, x + h, y + w, s->t.no_tex[i]);
 			i++;
 			w++;
 		}
