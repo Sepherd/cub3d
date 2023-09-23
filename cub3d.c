@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:42:44 by arecce            #+#    #+#             */
-/*   Updated: 2023/09/23 00:05:13 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/09/23 17:24:58 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ int	main(int ac, char **av)
 	init(&s);
 	if (ac != 2)
 		ft_perror("Errato numero di argomenti");
-	else if (check_file_type(&s, av[1], ".cub"))
+	else if (check_file_type(&s, av[1], ".cub", 0))
 	{
 		// ft_printf("x %d y %d\n", s.f.map_x, s.f.map_y);
 		s.mlx = mlx_init();

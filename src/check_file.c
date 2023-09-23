@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:42:37 by arecce            #+#    #+#             */
-/*   Updated: 2023/07/19 15:15:29 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/09/23 17:30:34 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	get_path(t_scene *s)
 	while (i < s->f.f_size)
 	{
 		k = 0;
-		// ft_printf("I = %d\n", i);
 		if (!empty_line(s, i, k))
 		{
 			if (!map_start(s, i, k))
@@ -39,7 +38,6 @@ int	get_path(t_scene *s)
 					while (s->f.file[i][k] != 32 && s->f.file[i][k] != '\n'
 						&& s->f.file[i][k])
 						tmp[j++] = s->f.file[i][k++];
-					// ft_printf("%s\n", tmp);
 					if (!check_id(s, tmp, i, k))
 						return (0);
 					free(tmp);
@@ -77,7 +75,6 @@ int	copy_file(t_scene *s, char *file)
 		line = get_next_line(fd);
 		s->f.file[i] = ft_calloc(ft_strlen(line) + 1, sizeof(char));
 		ft_strncpy(s->f.file[i], line, ft_strlen(line));
-		// ft_printf("Linea: %d - Stringa: %s\n", i, s->f.file[i]);
 		i++;
 	}
 	close(fd);
@@ -97,7 +94,7 @@ int	open_file(t_scene *s, char *file)
 	return(copy_file(s, file));
 }
 
-int	check_file_type(t_scene *s, char *file, char *ext)
+int	check_file_type(t_scene *s, char *file, char *ext, int f)
 {
 	int		i;
 	int		k;
@@ -106,13 +103,21 @@ int	check_file_type(t_scene *s, char *file, char *ext)
 	i = ft_strlen(file) - 4;
 	k = 0;
 	while (file[i])
-	{
 		temp[k++] = file[i++];
-	}
 	temp[k] = '\0';
 	if (!ft_strcmp(temp, ext))
-		return (ft_perror("Il file non è nel formato previsto"));
-	if (!open_file(s, file))
-		return (0);
+	{
+		if (f == 0)
+			return (ft_perror("Il file non è nel formato .cub"));
+		else if (f == 1)
+			return (ft_perror("Il file non è nel formato .xpm"));
+	}
+	if (f == 0)
+	{
+		if (!open_file(s, file))
+			return (0);
+		s->f.f_color = ((uint32_t)s->f.f_r << 16) | ((uint32_t)s->f.f_g << 8) | (uint32_t)s->f.f_b;
+		s->f.c_color = ((uint32_t)s->f.c_r << 16) | ((uint32_t)s->f.c_g << 8) | (uint32_t)s->f.c_b;
+	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:04:06 by arecce            #+#    #+#             */
-/*   Updated: 2023/07/06 16:55:45 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/09/23 17:08:07 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	ft_perror(char *msg)
 {
 	ft_printf("Error\n");
 	ft_printf("\033[1;31m%s\033[1;0m\n", msg);
+	exit(0);
 	return (0);
 }
 

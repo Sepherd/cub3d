@@ -1,6 +1,6 @@
 # include "../cub3d.h"
 
-void	drawWalls(t_scene *s, int	y1, int y2, int color)
+void	draw_floor_ceiling(t_scene *s, int	y1, int y2, int color)
 {
 	int	k;
 
@@ -13,35 +13,29 @@ void	drawWalls(t_scene *s, int	y1, int y2, int color)
 
 int hexStringToInt(char *hexString)
 {
-	int result = 0;
+	int		result;
+	char	currentChar;
+	int		digitValue;
 
-	// Salta il prefisso "0x" se presente
-	if (hexString[0] == '0' && (hexString[1] == 'x' || hexString[1] == 'X')) {
+	digitValue = 0;
+	result = 0;
+	if (hexString[0] == '0' && (hexString[1] == 'x' || hexString[1] == 'X'))
 		hexString += 2;
-	}
-
-	// Converte i caratteri esadecimali nella stringa in un intero
-	while (*hexString) {
-		char currentChar = *hexString;
-		int digitValue = 0;
-
-		if (currentChar >= '0' && currentChar <= '9') {
+	while (*hexString)
+	{
+		currentChar = *hexString;
+		if (currentChar >= '0' && currentChar <= '9')
 			digitValue = currentChar - '0';
-		} else if (currentChar >= 'A' && currentChar <= 'F') {
+		else if (currentChar >= 'A' && currentChar <= 'F')
 			digitValue = currentChar - 'A' + 10;
-		} else if (currentChar >= 'a' && currentChar <= 'f') {
+		else if (currentChar >= 'a' && currentChar <= 'f')
 			digitValue = currentChar - 'a' + 10;
-		} else {
-			// Carattere non valido nella stringa esadecimale
-			printf("Errore: carattere non valido nella stringa esadecimale.\n");
-			return 0;
-		}
-
+		else
+			return (ft_perror("Carattere non valido nella stringa esadecimale"));
 		result = result * 16 + digitValue;
 		hexString++;
 	}
-
-	return result;
+	return (result);
 }
 
 // void	walls(t_scene *s, int	y1, int y2)

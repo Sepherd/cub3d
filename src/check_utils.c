@@ -23,7 +23,6 @@ int	map_start(t_scene *s, int i, int k)
 
 int	empty_line(t_scene *s, int i, int k)
 {
-	// ft_printf("%d\n", s->f.file[i][k]);
 	if (s->f.file[i][k] == 10)
 		return (1);
 	else
@@ -60,7 +59,6 @@ int	count_word(char *line)
 
 	i = 0;
 	count = 0;
-	// ft_printf("Line: %s\n", line);
 	while (line[i])
 	{
 		if (ft_isprint(line[i]) && line[i] != 32)
@@ -71,22 +69,20 @@ int	count_word(char *line)
 		}
 		i++;
 	}
-	// ft_printf("Word: %d\n", count);
 	return (count);
 }
 
 int	save_texture_path(t_scene *s, char *tmp, int id)
 {
-	int	c;
-	// ft_printf("%s\n", tmp);
-	// if (!check_file_type(s, tmp, ".xpm"))
-	// 	return (ft_perror("Il formato del file non e' .xpm"));
-	c = 32;
+	// int	c;
+	// c = 32;
+	if (!check_file_type(s, tmp, ".xpm", 1))
+		return (0);
 	if (id == 0 && open(tmp, O_RDONLY) > 0)
 	{
 		s->f.no_path = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
 		ft_strncpy(s->f.no_path, tmp, ft_strlen(tmp));
-		s->no_wall = mlx_xpm_file_to_image(s->mlx, "../img/no_wall.xpm", &c, &c);
+		// s->no_wall = mlx_xpm_file_to_image(s->mlx, "../img/no_wall.xpm", &c, &c);
 		save_textures(s, id, tmp);
 		s->f.no_on = 1;
 	}
@@ -94,7 +90,7 @@ int	save_texture_path(t_scene *s, char *tmp, int id)
 	{
 		s->f.so_path = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
 		ft_strncpy(s->f.so_path, tmp, ft_strlen(tmp));
-		s->so_wall = mlx_xpm_file_to_image(s->mlx, "../img/so_wall.xpm", &c, &c);
+		// s->so_wall = mlx_xpm_file_to_image(s->mlx, "../img/so_wall.xpm", &c, &c);
 		save_textures(s, id, tmp);
 		s->f.so_on = 1;
 	}
@@ -102,7 +98,7 @@ int	save_texture_path(t_scene *s, char *tmp, int id)
 	{
 		s->f.ea_path = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
 		ft_strncpy(s->f.ea_path, tmp, ft_strlen(tmp));
-		s->ea_wall = mlx_xpm_file_to_image(s->mlx, "../img/ea_wall.xpm", &c, &c);
+		// s->ea_wall = mlx_xpm_file_to_image(s->mlx, "../img/ea_wall.xpm", &c, &c);
 		save_textures(s, id, tmp);
 		s->f.ea_on = 1;
 	}
@@ -110,7 +106,7 @@ int	save_texture_path(t_scene *s, char *tmp, int id)
 	{
 		s->f.we_path = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
 		ft_strncpy(s->f.we_path, tmp, ft_strlen(tmp));
-		s->we_wall = mlx_xpm_file_to_image(s->mlx, "../img/we_wall.xpm", &c, &c);
+		// s->we_wall = mlx_xpm_file_to_image(s->mlx, "../img/we_wall.xpm", &c, &c);
 		save_textures(s, id, tmp);
 		s->f.we_on = 1;
 	}
@@ -150,7 +146,6 @@ int	save_texture_color(t_scene *s, int i, int k, int id)
 	int	count;
 
 	count = 0;
-	// ft_printf("I: %d - ID: %d -- %d\n", i, id, s->f.file[i][k]);
 	while (s->f.file[i][k] != 10 && s->f.file[i][k])
 	{
 		// if (s->f.file[i][k] != 32 || !ft_isdigit(s->f.file[i][k]))
@@ -164,10 +159,9 @@ int	save_texture_color(t_scene *s, int i, int k, int id)
 			k++;
 		}
 		save_value(s, num, count, id);
-		// ft_printf("NUM = %d - ID = %d\n", num, id);
 		while (s->f.file[i][k] == 32)
 			k++;
-		if (s->f.file[i][k] == ',')
+		while (s->f.file[i][k] == ',')
 			k++;
 		if ((num < 0 || num > 255) || (++count > 3))
 			return (ft_perror("Valore RGB non corretto"));
@@ -193,12 +187,7 @@ int	get_texture_path(t_scene *s, int i, int k, int id)
 				k++;
 			tmp = ft_calloc(ft_strlen(s->f.file[i]) + 1, sizeof(char));
 			while (s->f.file[i][k] != 32 && ft_isprint(s->f.file[i][k]))
-			{
-				tmp[j] = s->f.file[i][k];
-				k++;
-				j++;
-			}
-			// ft_printf("%s\n", tmp);
+				tmp[j++] = s->f.file[i][k++];
 			while (s->f.file[i][k] != '\n')
 			{
 				if (s->f.file[i][k] != 32)
@@ -208,15 +197,11 @@ int	get_texture_path(t_scene *s, int i, int k, int id)
 			return (save_texture_path(s, tmp, id));	
 		}
 	}
-	// return (ft_perror("FLOOR E CEIL"));
-	// ft_printf("%s\n", s->f.file[i]);
 	return (save_texture_color(s, i, k, id));
 }
 
 int	check_id(t_scene *s, char *tmp, int i, int k)
 {
-	// ft_printf("ID = %s\nI = %d\nK = %d\n", tmp, i, k);
-	// ft_printf("ID %s\n", tmp);
 	if (ft_strcmp(tmp, NO_ID) && s->f.no_on == 0)
 		return (get_texture_path(s, i, k, 0));
 	else if (ft_strcmp(tmp, SO_ID)  && s->f.so_on == 0)

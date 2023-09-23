@@ -1,19 +1,19 @@
 #include "../cub3d.h"
 
-void	order_color(t_scene *s)
-{
-	int	i;
-	int	index;
+// void	order_color(t_scene *s)
+// {
+// 	int	i;
+// 	int	index;
 
-	i = 0;
-	index = 0;
-	while (i < 64 * 64)
-	{
-		index = (i % 64) * 64 + i / 64;
-		s->t.order_col[index] = s->t.no_tex[i];
-		i++;
-	}
-}
+// 	i = 0;
+// 	index = 0;
+// 	while (i < 64 * 64)
+// 	{
+// 		index = (i % 64) * 64 + i / 64;
+// 		s->t.order_col[index] = s->t.no_tex[i];
+// 		i++;
+// 	}
+// }
 
 void	free_matrix(char ***matrix, int x, int y)
 {
@@ -90,7 +90,6 @@ void	save_char_color(t_scene *s, char *tmp, int i, int id)
 		s->t.temp_color[i][0][1] = tmp[t];
 		t++;
 	}
-	// ft_printf("%s\n", s->t.temp_color[i][0]);
 	while (tmp[t] != '#')
 		t++;
 	t++;
@@ -103,7 +102,6 @@ void	save_char_color(t_scene *s, char *tmp, int i, int id)
 		t++;
 		k++;
 	}
-	// ft_printf("%d\n", ft_atoi(s->t.temp_color[i][1]));
 }
 
 int	array_alloc(t_scene *s, int id)
@@ -198,7 +196,7 @@ int	save_textures(t_scene *s, int id, char *file)
 	}
 	free(tmp);
 	free_matrix(s->t.temp_color, s->t.tot_col, 2);
-	free_matrix(s->t.temp_pixel, 64, 64); // free anche di temp_color e temp_pixel
+	free_matrix(s->t.temp_pixel, 64, 64);
 	s->t.index = 0;
 	close(fd);
 	// order_color(s);

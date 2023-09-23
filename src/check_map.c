@@ -90,6 +90,35 @@ int	map_line_check(t_scene *s)
 	return (1);
 }
 
+int	delta_walls(t_scene *s, int i)
+{
+	int	d;
+	int	k;
+
+	d = ft_strlen(s->f.map[i]) - ft_strlen(s->f.map[i + 1]);
+	if (d > 0)
+	{
+		k = ft_strlen(s->f.map[i]) - 2;
+		while (d-- > 0)
+		{
+			if (s->f.map[i][k] != 49)
+				return (0);
+			k--;
+		}
+	}
+	else if (d < 0)
+	{
+		k = ft_strlen(s->f.map[i + 1]) - 2;
+		while (d++ < 0)
+		{
+			if (s->f.map[i + 1][k] != 49)
+				return (0);
+			k--;
+		}
+	}
+	return (1);
+}
+
 int	border_check(t_scene *s)
 {
 	int	i;
@@ -98,12 +127,9 @@ int	border_check(t_scene *s)
 	i = 1;
 	while (i < s->f.m_size - 1)
 	{
-		// ft_printf("I = %d - LAST = %d\nLUN = %d\nSTR = %s\n", i, s->f.map[i][ft_strlen(s->f.map[i]) - 2], ft_strlen(s->f.map[i]), s->f.map[i]);
-		if (s->f.map[i][0] == 49 && s->f.map[i][ft_strlen(s->f.map[i]) - 2] == 49)
-		{
-			// s->f.tot += 2;
+		if ((s->f.map[i][0] == 49 && s->f.map[i][ft_strlen(s->f.map[i]) - 2] == 49) \
+			&& delta_walls(s, i))
 			i++;
-		}
 		else
 			return (ft_perror("Mappa non chiusa nel modo corretto"));
 	}

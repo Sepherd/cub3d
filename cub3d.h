@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:42:48 by arecce            #+#    #+#             */
-/*   Updated: 2023/09/23 00:05:19 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/09/23 17:24:18 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,12 @@ typedef struct s_file
 	int		f_r;
 	int		f_g;
 	int		f_b;
+	uint32_t	f_color;
 	int		c_on;
 	int		c_r;
 	int		c_g;
-	int		c_b;	
+	int		c_b;
+	uint32_t	c_color;
 	char	**file;
 	int		f_size;
 	char	*map_start;
@@ -186,7 +188,7 @@ int		count_word(char *line);
 int		copy_file(t_scene *s, char *file);
 int		get_id(t_scene *s);
 int		check_id(t_scene *s, char *tmp, int i, int k);
-int		check_file_type(t_scene *s, char *file, char *ext);
+int		check_file_type(t_scene *s, char *file, char *ext, int f);
 int		map_start(t_scene *s, int i, int k);
 int		copy_map(t_scene *s, int i);
 int		border_check(t_scene *s);
@@ -205,7 +207,7 @@ void	my_mlx_pixel_put(t_scene *data, int x, int y, int color);
 // void	 drawLine(t_scene *s, int x1, int y1, int angle);
 void	drawLine(t_scene *s, int ex, int ey, int color);
 // void	drawWalls(t_scene *s, int x0, int y0, int x1, int y1, int color);
-void	drawWalls(t_scene *s, int	y1, int y2, int color);
+void	draw_floor_ceiling(t_scene *s, int	y1, int y2, int color);
 // void	walls(t_scene *s, int	y1, int y2);
 void walls(t_scene *s, int x, int y, int lineH, double ty_off);
 

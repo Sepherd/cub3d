@@ -171,8 +171,8 @@ void	draw_rays(t_scene *s)
 		int	lineOff = -lineH / 2 + SCREEN_Y / 2;
 		if (lineOff < 0)
 			lineOff = 0;
-		drawWalls(s, 0, SCREEN_X / 2, 0x00FF00);
-		drawWalls(s, (SCREEN_Y / 2) + 1, SCREEN_Y, 0x0000FF);
+		draw_floor_ceiling(s, 0, SCREEN_X / 2, s->f.c_color);
+		draw_floor_ceiling(s, (SCREEN_Y / 2) + 1, SCREEN_Y, s->f.f_color);
 		walls(s, s->r.rr, lineOff, lineH, ty_off);
 		// drawLine(s, s->r.rx, s->r.ry, 0x00FF0000);
 		s->r.ra = fixAng(s->r.ra - 0.1);
