@@ -6,11 +6,26 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:04:06 by arecce            #+#    #+#             */
-/*   Updated: 2023/09/22 17:43:59 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/09/25 18:13:01 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	init_ray(t_scene *s)
+{
+	s->r.dof = 0;
+	s->r.rr = 0;
+	s->r.mp = 0;
+	s->r.mx = 0;
+	s->r.my = 0;
+	s->r.rx = 0;
+	s->r.ry = 0;
+	s->r.xo = 0;
+	s->r.yo = 0;
+	s->r.shade = 1;
+	s->r.rTan = 0;
+}
 
 void	init(t_scene *s)
 {
@@ -35,14 +50,8 @@ void	init(t_scene *s)
 	s->pg.press_w = 0;
 	s->pg.press_la = 0;
 	s->pg.press_ra = 0;
-	
-	
 	s->t.index = 0;
 	s->t.no_tex = (int *)malloc(sizeof(int) * (64 * 64));
 	s->t.order_col = (int *)malloc(sizeof(int) * (64 * 64));
-	// s->d.frame = 0;
-	// s->d.curr_time = 0;
-	// s->d.prev_time = 0;
-	// s->d.fps = 0;
 	init_ray(s);
 }

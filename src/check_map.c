@@ -45,6 +45,10 @@ void	save_pg_position(t_scene *s, char direction, int i, int k)
 	s->pg.pdy = -sin(degToRad(s->pg.pa));
 	s->pg.pos_x = k * 64;
 	s->pg.pos_y = i * 64;
+	if (s->f.map_x <= s->f.map_y)
+		s->r.dof_min = s->f.map_y;
+	else
+		s->r.dof_min = s->f.map_x;
 }
 
 int	map_line_check(t_scene *s)

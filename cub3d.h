@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:42:48 by arecce            #+#    #+#             */
-/*   Updated: 2023/09/23 17:24:18 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/09/25 18:27:14 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,11 @@ typedef struct s_ray
 	int		my;
 	int		mp;
 	int		dof;
+	int		dof_min;
 	double	rx;
 	double	ry;
 	double	ra;
+	double	rTan;
 	double	xo;
 	double	yo;
 	double	disH;
@@ -173,6 +175,7 @@ typedef struct	s_scene
 }				t_scene;
 
 /***** INIT *****/
+void	init_ray(t_scene *s);
 void	init(t_scene *s);
 
 /***** UTILS *****/
@@ -212,9 +215,12 @@ void	draw_floor_ceiling(t_scene *s, int	y1, int y2, int color);
 void walls(t_scene *s, int x, int y, int lineH, double ty_off);
 
 	/***** RAY *****/
+double	degToRad(double a);
+double	fixAng(double a);
+void	ray(t_scene *s);
 double 	degToRad(double a);
 double 	fixAng(double a);
-void 	init_ray(t_scene *s);
-void	draw_rays(t_scene *s);
+void	ray_vertical_dof(t_scene *s);
+void	ray_horizontal_dof(t_scene *s);
 
 #endif

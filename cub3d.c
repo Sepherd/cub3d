@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:42:44 by arecce            #+#    #+#             */
-/*   Updated: 2023/09/23 17:24:58 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/09/25 18:08:12 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ int mov(t_scene *s)
 	// drawLine(s, 0, -30, 0x00FF0000);
 	// printf("PDX = %f - PDY = %f\n", s->pg.pdx, s->pg.pdy);
 	// drawCircle(s, s->pg.pos_x, s->pg.pos_y, 8, 0x00FF0000);
-	draw_rays(s);
+	ray(s);
 	// draw_line(s, 32);
 	mlx_put_image_to_window(s->mlx, s->win, s->img, 0, 0);
 	return (0);
