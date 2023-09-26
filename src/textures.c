@@ -199,6 +199,5 @@ int	save_textures(t_scene *s, int id, char *file)
 	free_matrix(s->t.temp_pixel, 64, 64);
 	s->t.index = 0;
 	close(fd);
-	// order_color(s);
 	return (1);
 };

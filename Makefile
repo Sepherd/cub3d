@@ -6,7 +6,7 @@
 #    By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/26 16:33:57 by arecce            #+#    #+#              #
-#    Updated: 2023/09/25 18:28:45 by sepherd          ###   ########.fr        #
+#    Updated: 2023/09/26 16:53:07 by sepherd          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ LIBFT = libft/libft.a
 SRCS = cub3d.c src/check_file.c src/check_utils.c \
 		 src/draw.c src/init.c src/check_utils2.c \
 		 src/utils.c src/check_map.c src/ray.c \
-		 src/textures.c src/ray_utils.c
+		 src/textures.c src/ray_utils.c src/movement.c \
+		 src/movement_utils.c
 
 MLX_L = mlx_linux/
 # MLX = mlx/

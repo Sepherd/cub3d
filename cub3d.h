@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:42:48 by arecce            #+#    #+#             */
-/*   Updated: 2023/09/25 18:27:14 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/09/26 17:32:17 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct	s_textures
 	int		*ea_tex;
 	int		*we_tex;
 	int		index;
-	int		*order_col;
 }				t_textures;
 
 
@@ -184,6 +183,14 @@ int		ft_strcmp(char *s1, char *s2);
 char	*ft_strncpy(char *dst, const char *src, size_t len);
 int		empty_line(t_scene *s, int i, int k);
 int		hexStringToInt(char *hexString);
+void	my_mlx_pixel_put(t_scene *data, int x, int y, int color);
+int		exit_game(t_scene *s);
+void	mov_utils(t_scene *s);
+int		isPositionValid(t_scene *s, double x, double y);
+int		mov(t_scene *s);
+int		key(int keycode, t_scene *s);
+int		keyup(int keycode, t_scene *s);
+void	movement(int keycode, t_scene *s);
 
 /***** CHECK *****/
 void	get_rows(t_scene *s, int fd);
@@ -209,10 +216,8 @@ void	my_mlx_pixel_put(t_scene *data, int x, int y, int color);
 // void	drawLine(t_scene *s, int x0, int y0, int x1, int y1);
 // void	 drawLine(t_scene *s, int x1, int y1, int angle);
 void	drawLine(t_scene *s, int ex, int ey, int color);
-// void	drawWalls(t_scene *s, int x0, int y0, int x1, int y1, int color);
 void	draw_floor_ceiling(t_scene *s, int	y1, int y2, int color);
-// void	walls(t_scene *s, int	y1, int y2);
-void walls(t_scene *s, int x, int y, int lineH, double ty_off);
+void	draw_walls(t_scene *s, int x, int y, int lineH, double ty_off);
 
 	/***** RAY *****/
 double	degToRad(double a);

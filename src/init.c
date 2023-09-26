@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:04:06 by arecce            #+#    #+#             */
-/*   Updated: 2023/09/25 18:13:01 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/09/26 17:32:12 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,5 @@ void	init(t_scene *s)
 	s->pg.press_la = 0;
 	s->pg.press_ra = 0;
 	s->t.index = 0;
-	s->t.no_tex = (int *)malloc(sizeof(int) * (64 * 64));
-	s->t.order_col = (int *)malloc(sizeof(int) * (64 * 64));
 	init_ray(s);
 }

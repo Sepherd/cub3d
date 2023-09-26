@@ -79,7 +79,7 @@ void	ray_vertical(t_scene *s)
 	ray_vertical_dof(s);
 }
 
-void	draw_ray(t_scene *s)
+void	draw_textures(t_scene *s)
 {
 	int		ca;
 	int		lineH;
@@ -98,7 +98,7 @@ void	draw_ray(t_scene *s)
 		lineOff = 0;
 	draw_floor_ceiling(s, 0, SCREEN_X / 2, s->f.c_color);
 	draw_floor_ceiling(s, (SCREEN_Y / 2) + 1, SCREEN_Y, s->f.f_color);
-	walls(s, s->r.rr, lineOff, lineH, ty_off);
+	draw_walls(s, s->r.rr, lineOff, lineH, ty_off);
 }
 
 void	ray(t_scene *s)
@@ -112,7 +112,7 @@ void	ray(t_scene *s)
 		s->r.vy = s->r.ry;
 		ray_horizontal(s);
 		ray_direction(s);
-		draw_ray(s);
+		draw_textures(s);
 		s->r.ra = fixAng(s->r.ra - 0.1);
 		s->r.rr++;
 	}

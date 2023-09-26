@@ -11,77 +11,10 @@ void	draw_floor_ceiling(t_scene *s, int	y1, int y2, int color)
 		my_mlx_pixel_put(s, s->r.rr, y1 + k, color);
 }
 
-int hexStringToInt(char *hexString)
+int	tx_calc(t_scene *s)
 {
-	int		result;
-	char	currentChar;
-	int		digitValue;
+	int	tx;
 
-	digitValue = 0;
-	result = 0;
-	if (hexString[0] == '0' && (hexString[1] == 'x' || hexString[1] == 'X'))
-		hexString += 2;
-	while (*hexString)
-	{
-		currentChar = *hexString;
-		if (currentChar >= '0' && currentChar <= '9')
-			digitValue = currentChar - '0';
-		else if (currentChar >= 'A' && currentChar <= 'F')
-			digitValue = currentChar - 'A' + 10;
-		else if (currentChar >= 'a' && currentChar <= 'f')
-			digitValue = currentChar - 'a' + 10;
-		else
-			return (ft_perror("Carattere non valido nella stringa esadecimale"));
-		result = result * 16 + digitValue;
-		hexString++;
-	}
-	return (result);
-}
-
-// void	walls(t_scene *s, int	y1, int y2)
-// {
-// 	int	x1 = s->r.rr * 10;
-// 	int	x2 = x1 + 10;
-// 	int i = x1;
-
-// 	while (i < x2)
-// 	{
-// 		int k = 0;
-// 		int	tH = (((y2 - y1) * 64) / s->f.map_y);
-// 		int	tO = (64 - tH) / 2;
-// 		double tS = (double)64 / (double)tH;
-// 		// printf("tO %d tS%f\n", tO, tS);
-// 		// if (k <= 0)
-// 		// 	k = 1;
-// 		while (k < (y2 - y1))
-// 		{
-// 			int tY = (int)(k * tS) + tO;
-// 			// ft_printf("%d\n", tY);
-// 			if (tY < 0)
-// 				tY = 0;
-// 			if (tY > 63)
-// 				tY = 63;
-// 			// ft_printf("%d\n", tY * 64 + i);
-// 			int color = s->t.no_tex[tY * 64 + i];
-// 			// ft_printf("%d\n", color);
-// 			my_mlx_pixel_put(s, i, y1 + k, color);
-// 			k++;
-// 		}
-// 		i++;
-// 	}
-// }
-
-void walls(t_scene *s, int x, int y, int lineH, double ty_off)
-{
-	double	ty_step;
-	double	texPos;
-	int		tx;
-	int		color;
-	int		index;
-
-	ty_step = 1.0 * 64.0 / (double)lineH;
-	texPos = (y - SCREEN_Y / 2 + lineH / 2) * ty_step;
-	tx = 0;
 	if (s->r.shade == 1)
 	{
 		tx = ((int)(s->r.rx/2.0))%64;
@@ -94,68 +27,48 @@ void walls(t_scene *s, int x, int y, int lineH, double ty_off)
 		if (s->r.ra > 90 && s->r.ra < 270)
 			tx = 64 - tx - 1;
 	}
+	return (tx);
+}
+
+int	texture_type(t_scene *s, int index)
+{
+	int	color;
+
+	if (s->r.wall_side == 'E')
+		color = s->t.ea_tex[index];
+	else if (s->r.wall_side == 'W')
+		color = s->t.we_tex[index];
+	else if (s->r.wall_side == 'S')
+		color = s->t.so_tex[index];
+	else if (s->r.wall_side == 'N')
+		color = s->t.no_tex[index];
+	return (color);
+}
+
+void draw_walls(t_scene *s, int x, int y, int lineH, double ty_off)
+{
+	double	ty_step;
+	double	texPos;
+	int		tx;
+	int		color;
+	int		index;
+
+	ty_step = 1.0 * 64.0 / (double)lineH;
+	texPos = (y - SCREEN_Y / 2 + lineH / 2) * ty_step;
+	tx = tx_calc(s);	
 	while (y < ty_off)
 	{
 		int texY = (int)texPos & (64 - 1);
 		texPos += ty_step;
 		index = 64 * texY + tx;
-		if (s->r.wall_side == 'E')
-			color = s->t.ea_tex[index];
-		else if (s->r.wall_side == 'W')
-			color = s->t.we_tex[index];
-		else if (s->r.wall_side == 'S')
-			color = s->t.so_tex[index];
-		else if (s->r.wall_side == 'N')
-			color = s->t.no_tex[index];
-		// if (s->r.shade == 0)
-		// 	color = (color >> 1) & 8355711;
+		color = texture_type(s, index);
 		my_mlx_pixel_put(s, x, y, color);
 		y++;
 	}
 }
 
-// void	drawWalls(t_scene *s, int y0, int y1, int color)
-// {
-// 	int	len = y1 - y0;
-
-// 	// ft_printf("Y0 %d Y1 %d LEN %d\n", y0, y1, len);
-// 	while (len--)
-// 		my_mlx_pixel_put(s, s->r.rr * 8 + 530, len, color);
-// 	// int startY = y0 < y1 ? y0 : y0;
-//     // int endY = y0 < y1 ? y1 : y0;
-
-//     // // Disegna la linea verticale iterando lungo l'asse y
-//     // for (int y = startY; y <= endY; y++)
-//     // {
-//     //     my_mlx_pixel_put(s, s->r.rr, y, color);
-//     // }
-// }
-
-// void	drawWalls(t_scene *s, int x, int y, int color)
-// {
-// 	while (s->r.rr != (s->r.rr + x) || s->r.rr != (s->r.rr + y))
-// 	{
-// 		// ft_printf("X = %d, Y = %d\n", x, y);
-// 		my_mlx_pixel_put(s, s->r.rr + x, s->r.rr + y, color);
-// 		if (s->r.rr < (s->r.rr + x))
-// 			x--;
-// 		else if (s->r.rr > (s->r.rr + x))
-// 			x++;
-// 		if (s->r.rr < (s->r.rr + y))
-// 			y--;
-// 		else if (s->r.rr > (s->r.rr + y))
-// 			y++;
-// 	}
-// 	// mlx_put_image_to_window(s->mlx, s->win, s->img, 0, 0);
-// }
-
-// void drawWalls(t_scene *s, int r, double lineO, double lineH, int color)
-// {
-// 	int endY = (lineO + lineH);
-
-// 	for(int y = lineO; y <= endY; y++)
-// 		my_mlx_pixel_put(s, r, y, color);
-// }
+// if (s->r.shade == 0 || s->r.shade == 2)
+	// color = (color >> 1) & 8355711;
 
 void	draw_square(t_scene *s, int x, int y, int lt, int color)
 {
@@ -171,7 +84,6 @@ void	draw_square(t_scene *s, int x, int y, int lt, int color)
 		w = 0;
 		while (w < lt)
 		{
-			// ft_printf("H %d W %d\n", h, w);
 			my_mlx_pixel_put(s, x + h, y + w, s->t.no_tex[i]);
 			i++;
 			w++;
@@ -195,7 +107,6 @@ void	drawMap(t_scene *s)
 		x = 0;
 		while (s->f.map[i][k])
 		{
-			// ft_printf("%d\n", s->f.map[i][k]);
 			if (s->f.map[i][k] == 10)
 				break ;
 			if (s->f.map[i][k] == 49)
@@ -248,35 +159,8 @@ void	drawLine(t_scene *s, int ex, int ey, int color)
 		my_mlx_pixel_put(s, pixelX, pixelY, color);
 		pixelX += dx;
 		pixelY += dy;
-		// --pixels;
 	}
 }
-
-// void drawWalls(t_scene *s, int x0, int y0, int x1, int y1, int color)
-// {
-// 	int dx = abs(x1 - x0);
-// 	int dy = abs(y1 - y0);
-// 	int sx = x0 < x1 ? 1 : -1;
-// 	int sy = y0 < y1 ? 1 : -1;
-// 	int err = dx - dy;
-
-// 	while (x0 != x1 || y0 != y1) {
-// 		my_mlx_pixel_put(s, x0, y0, color);
-
-// 		int e2 = err * 2;
-// 		if (e2 > -dy) {
-// 			err -= dy;
-// 			x0 += sx;
-// 		}
-// 		if (e2 < dx) {
-// 			err += dx;
-// 			y0 += sy ;
-// 		}
-// 	}
-// 	// Disegna il punto finale
-// 	my_mlx_pixel_put(s, x0, x0, color);
-// }
-
 
 void drawCircle(t_scene *s, int centerX, int centerY, int radius, int color) // algoritmo di Bresenham
 {
