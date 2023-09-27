@@ -49,7 +49,6 @@ void	get_rows(t_scene *s, int fd)
 		s->f.f_size++;
 	}
 	free(line);
-	// close(fd);
 }
 
 int	count_word(char *line)
@@ -74,39 +73,25 @@ int	count_word(char *line)
 
 int	save_texture_path(t_scene *s, char *tmp, int id)
 {
-	// int	c;
-	// c = 32;
 	if (!check_file_type(s, tmp, ".xpm", 1))
 		return (0);
 	if (id == 0 && open(tmp, O_RDONLY) > 0)
 	{
-		s->f.no_path = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
-		ft_strncpy(s->f.no_path, tmp, ft_strlen(tmp));
-		// s->no_wall = mlx_xpm_file_to_image(s->mlx, "../img/no_wall.xpm", &c, &c);
 		save_textures(s, id, tmp);
 		s->f.no_on = 1;
 	}
 	else if (id == 1 && open(tmp, O_RDONLY) > 0)
 	{
-		s->f.so_path = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
-		ft_strncpy(s->f.so_path, tmp, ft_strlen(tmp));
-		// s->so_wall = mlx_xpm_file_to_image(s->mlx, "../img/so_wall.xpm", &c, &c);
 		save_textures(s, id, tmp);
 		s->f.so_on = 1;
 	}
 	else if (id == 2 && open(tmp, O_RDONLY) > 0)
 	{
-		s->f.ea_path = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
-		ft_strncpy(s->f.ea_path, tmp, ft_strlen(tmp));
-		// s->ea_wall = mlx_xpm_file_to_image(s->mlx, "../img/ea_wall.xpm", &c, &c);
 		save_textures(s, id, tmp);
 		s->f.ea_on = 1;
 	}
 	else if (id == 3 && open(tmp, O_RDONLY) > 0)
 	{
-		s->f.we_path = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
-		ft_strncpy(s->f.we_path, tmp, ft_strlen(tmp));
-		// s->we_wall = mlx_xpm_file_to_image(s->mlx, "../img/we_wall.xpm", &c, &c);
 		save_textures(s, id, tmp);
 		s->f.we_on = 1;
 	}
@@ -148,16 +133,11 @@ int	save_texture_color(t_scene *s, int i, int k, int id)
 	count = 0;
 	while (s->f.file[i][k] != 10 && s->f.file[i][k])
 	{
-		// if (s->f.file[i][k] != 32 || !ft_isdigit(s->f.file[i][k]))
-		// 	break ;
 		num = 0;
 		while (s->f.file[i][k] == 32)
 			k++;
 		while ((s->f.file[i][k] >= '0') && (s->f.file[i][k] <= '9'))
-		{
-			num = num * 10 + (s->f.file[i][k] - '0');
-			k++;
-		}
+			num = num * 10 + (s->f.file[i][k++] - '0');
 		save_value(s, num, count, id);
 		while (s->f.file[i][k] == 32)
 			k++;

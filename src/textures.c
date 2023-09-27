@@ -15,18 +15,6 @@
 // 	}
 // }
 
-void	free_matrix(char ***matrix, int x, int y)
-{
-	for (int i = 0; i < x; i++)
-	{
-        for (int j = 0; j < y; j++)
-		{
-            free(matrix[i][j]);
-        }
-        free(matrix[i]);
-    }
-    free(matrix);
-}
 
 void	save_color(t_scene *s, char *c, int id)
 {
@@ -104,35 +92,6 @@ void	save_char_color(t_scene *s, char *tmp, int i, int id)
 	}
 }
 
-int	array_alloc(t_scene *s, int id)
-{
-	if (id == 0)
-	{
-		s->t.no_tex = (int *)malloc((64 * 64) * sizeof(int));
-		if (s->t.no_tex == NULL)
-			return (ft_perror("Allocazione fallita"));
-	}
-	else if (id == 1)
-	{
-		s->t.so_tex = (int *)malloc((64 * 64) * sizeof(int));
-		if (s->t.so_tex == NULL)
-			return (ft_perror("Allocazione fallita"));
-	}
-	else if (id == 2)
-	{
-		s->t.ea_tex = (int *)malloc((64 * 64) * sizeof(int));
-		if (s->t.ea_tex == NULL)
-			return (ft_perror("Allocazione fallita"));
-	}
-	else if (id == 3)
-	{
-		s->t.we_tex = (int *)malloc((64 * 64) * sizeof(int));
-		if (s->t.we_tex == NULL)
-			return (ft_perror("Allocazione fallita"));
-	}
-	return (1);
-}
-
 void	texture_total_color(t_scene *s, char *line, int id)
 {
 	int		i;
@@ -165,7 +124,6 @@ int	save_textures(t_scene *s, int id, char *file)
 {
 	int		fd;
 	int		i;
-	char	*tmp;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
@@ -175,28 +133,10 @@ int	save_textures(t_scene *s, int id, char *file)
 		get_next_line(fd);
 	texture_total_color(s, get_next_line(fd), id);
 	s->t.temp_color = (char ***)malloc(sizeof(char **) * s->t.tot_col);
-	s->t.temp_pixel = (char ***)malloc(sizeof(char **) * 64);
-	i = 0;
-	while (i < s->t.tot_col)
-	{
-		tmp = get_next_line(fd);
-		save_char_color(s, tmp, i, id);
-		free(tmp);
-		i++;
-	}
-	get_next_line(fd);
-	tmp = get_next_line(fd);
-	i = 0;
-	while (i < 64)
-	{
-		save_pixels(s, tmp, i, id);
-		free(tmp);
-		tmp = get_next_line(fd);
-		i++;
-	}
-	free(tmp);
+	s->t.temp_pixel = (char ***)malloc(sizeof(char **) * TEX_Y);
+	save_tex_utils(s, fd, id);
 	free_matrix(s->t.temp_color, s->t.tot_col, 2);
-	free_matrix(s->t.temp_pixel, 64, 64);
+	free_matrix(s->t.temp_pixel, TEX_X, TEX_Y);
 	s->t.index = 0;
 	close(fd);
 	return (1);

@@ -17,8 +17,8 @@ void	move_left_right(t_scene *s, int dir)
 	double	new_y;
 	if (dir == 0)
 	{
-		new_x = s->pg.pos_x + s->pg.pdy * 0.5;
-		new_y = s->pg.pos_y - s->pg.pdx * 0.5;
+		new_x = s->pg.pos_x + s->pg.pdy * 0.7;
+		new_y = s->pg.pos_y - s->pg.pdx * 0.7;
 		if (isPositionValid(s, new_x, new_y))
 		{
 			s->pg.pos_x = new_x;
@@ -27,8 +27,8 @@ void	move_left_right(t_scene *s, int dir)
 	}
 	else if (dir == 1)
 	{
-		new_x = s->pg.pos_x - s->pg.pdy * 0.5;
-		new_y = s->pg.pos_y + s->pg.pdx * 0.5;
+		new_x = s->pg.pos_x - s->pg.pdy * 0.7;
+		new_y = s->pg.pos_y + s->pg.pdx * 0.7;
 		if (isPositionValid(s, new_x, new_y))
 		{
 			s->pg.pos_x = new_x;
@@ -61,14 +61,6 @@ int	mov(t_scene *s)
 		rotation_camera(s, 0);
 	if (s->pg.press_ra)
 		rotation_camera(s, 1);
-	if (s->pg.pdx < 0)
-		s->pg.xo = -20;
-	else
-		s->pg.xo = 20;
-	if (s->pg.pdy < 0)
-		s->pg.yo = -20;
-	else
-		s->pg.yo = 20;
 	mov_utils(s);
 	if (s->pg.press_s)
 		move_forward_backward(s, 0);

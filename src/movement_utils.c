@@ -2,6 +2,14 @@
 
 void	mov_utils(t_scene *s)
 {
+	if (s->pg.pdx < 0)
+		s->pg.xo = -20;
+	else
+		s->pg.xo = 20;
+	if (s->pg.pdy < 0)
+		s->pg.yo = -20;
+	else
+		s->pg.yo = 20;
 	s->pg.ipx = s->pg.pos_x / 64.0;
 	s->pg.ipx_add_xo = (s->pg.pos_x + s->pg.xo) / 64.0;
 	s->pg.ipx_sub_xo = (s->pg.pos_x - s->pg.xo) / 64.0;

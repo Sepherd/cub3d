@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:42:48 by arecce            #+#    #+#             */
-/*   Updated: 2023/09/26 17:32:17 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/09/27 18:26:28 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,6 @@
 # define SCREEN_X 640
 # define SCREEN_Y 640
 
-
-// typedef struct s_display
-// {
-// 	int		frame;
-// 	int		curr_time;
-// 	int		prev_time;
-// 	double	fps;
-// }				t_display;
-
 typedef struct	s_textures
 {
 	char	***temp_color;
@@ -67,7 +58,6 @@ typedef struct	s_textures
 	int		*we_tex;
 	int		index;
 }				t_textures;
-
 
 typedef struct s_ray
 {
@@ -93,7 +83,6 @@ typedef struct s_ray
 	double	shade;
 	char	wall_side;
 }				t_ray;
-
 
 typedef struct s_file
 {
@@ -164,9 +153,6 @@ typedef struct	s_scene
 	void		*so_wall;
 	void		*ea_wall;
 	void		*we_wall;
-	// int			screenX;
-	// int			screenY;
-	// t_display	d;
 	t_textures	t;
 	t_pg		pg;
 	t_file		f;
@@ -193,6 +179,8 @@ int		keyup(int keycode, t_scene *s);
 void	movement(int keycode, t_scene *s);
 
 /***** CHECK *****/
+void	map_to_array_check(t_scene *s, int y, int x, int i);
+int		map_line_utils(t_scene *s, int i, int k);
 void	get_rows(t_scene *s, int fd);
 int		count_word(char *line);
 int		copy_file(t_scene *s, char *file);
@@ -204,20 +192,25 @@ int		copy_map(t_scene *s, int i);
 int		border_check(t_scene *s);
 
 /***** TEXTURES *****/
+void	free_matrix(char ***matrix, int x, int y);
+int		array_alloc(t_scene *s, int id);
+void	save_pixels(t_scene *s, char *tmp, int i, int id);
+void	save_char_color(t_scene *s, char *tmp, int i, int id);
+void	save_tex_utils(t_scene *s, int fd, int id);
 int		save_textures(t_scene *s, int id, char *file);
 
 /***** DRAW *****/
-void	draw_square(t_scene *s, int x, int y, int lt, int color);
-void	drawMap(t_scene *s);
-void	draw_line(t_scene *s, int len);
-void 	drawCircle(t_scene *s, int centerX, int centerY, int radius, int color);
 void	my_mlx_pixel_put(t_scene *data, int x, int y, int color);
+void	draw_floor_ceiling(t_scene *s, int	y1, int y2, int color);
+void	draw_walls(t_scene *s, int x, int y, int lineH, double ty_off);
+// void	draw_square(t_scene *s, int x, int y, int lt, int color);
+// void	drawMap(t_scene *s);
+// void	draw_line(t_scene *s, int len);
+// void drawCircle(t_scene *s, int centerX, int centerY, int radius, int color);
 // void	drawLine(t_scene *s, int x, int y, int color);
 // void	drawLine(t_scene *s, int x0, int y0, int x1, int y1);
 // void	 drawLine(t_scene *s, int x1, int y1, int angle);
-void	drawLine(t_scene *s, int ex, int ey, int color);
-void	draw_floor_ceiling(t_scene *s, int	y1, int y2, int color);
-void	draw_walls(t_scene *s, int x, int y, int lineH, double ty_off);
+// void	drawLine(t_scene *s, int ex, int ey, int color);
 
 	/***** RAY *****/
 double	degToRad(double a);

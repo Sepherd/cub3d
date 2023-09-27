@@ -27,7 +27,6 @@ int	copy_map(t_scene *s, int i)
 	int	x;
 	int	y;
 
-
 	s->f.m_size = s->f.f_size - i;
 	s->f.map = malloc(sizeof(char **) * (s->f.m_size));
 	x = 0;
@@ -42,12 +41,9 @@ int	copy_map(t_scene *s, int i)
 				s->f.map[x][y] = 49;
 			else
 				s->f.map[x][y] = s->f.file[i][k];
-			if (s->f.map[x][y] != 10)
-				s->f.tot++;
 			y++;
 			k++;
 		}
-		// ft_printf("%s", s->f.map[x]);
 		i++;
 		x++;
 	}

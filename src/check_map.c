@@ -1,7 +1,5 @@
 # include "../cub3d.h"
 
-//check degli angoli della mappa
-
 void	map_to_array(t_scene *s)
 {
 	int	x;
@@ -17,13 +15,7 @@ void	map_to_array(t_scene *s)
 		x = 0;
 		while (x < s->f.map_x)
 		{
-			if (s->f.map[y][x] == 48)
-				s->f.arr_map[i] = 0;
-			else if (s->f.map[y][x] == 49)
-				s->f.arr_map[i] = 1;
-			else if (s->f.map[y][x] == 'N' || s->f.map[y][x] == 'S' \
-				|| s->f.map[y][x] == 'E' || s->f.map[y][x] == 'W')
-				s->f.arr_map[i] = 0;
+			map_to_array_check(s, y, x, i);
 			i++;
 			x++;
 		}
@@ -31,56 +23,19 @@ void	map_to_array(t_scene *s)
 	}
 }
 
-void	save_pg_position(t_scene *s, char direction, int i, int k)
-{
-	if (direction == 'N')
-		s->pg.pa = 90;
-	else if (direction == 'S')
-		s->pg.pa = 270;
-	else if (direction == 'E')
-		s->pg.pa = 0;
-	else if (direction == 'W')
-		s->pg.pa = 180;
-	s->pg.pdx = cos(degToRad(s->pg.pa));
-	s->pg.pdy = -sin(degToRad(s->pg.pa));
-	s->pg.pos_x = k * 64;
-	s->pg.pos_y = i * 64;
-	if (s->f.map_x <= s->f.map_y)
-		s->r.dof_min = s->f.map_y;
-	else
-		s->r.dof_min = s->f.map_x;
-}
-
 int	map_line_check(t_scene *s)
 {
 	int		i;
 	size_t	k;
-	int		count;
 
 	i = 1;
-	count = 0;
 	while (i < s->f.m_size - 2)
 	{
 		k = 1;
 		while (k < ft_strlen(s->f.map[i]) - 2)
 		{
-			// ft_printf("%c", s->f.map[i][k]);
-			if ((int)ft_strlen(s->f.map[i]) - 1 > s->f.map_x)
-				s->f.map_x = ft_strlen(s->f.map[i]) - 1;
-			if (s->f.map[i][k] == 48 || s->f.map[i][k] == 49)
-			{
-				// s->f.tot++;
-				k++;
-			}
-			else if ((s->f.map[i][k] == 'N' || s->f.map[i][k] == 'S'
-				|| s->f.map[i][k] == 'W' || s->f.map[i][k] == 'E') && count == 0)
-			{	
-				save_pg_position(s, s->f.map[i][k], i, k);
-				count = 1;
-				s->f.map[i][k] = '0';
-				// s->f.tot++;
-				k++;
-			}
+			if (k != 0)
+				k = map_line_utils(s, i, k);
 			else
 				return (ft_perror("Mappa non valida"));
 		}
@@ -88,9 +43,6 @@ int	map_line_check(t_scene *s)
 	}
 	s->f.map_y = s->f.m_size;
 	map_to_array(s);
-	// s->screenX = s->f.map_x * 64;
-	// s->screenY = s->f.map_y * 64;
-	// ft_printf("TOT = %d\n", s->f.tot);
 	return (1);
 }
 
