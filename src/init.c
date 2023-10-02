@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:04:06 by arecce            #+#    #+#             */
-/*   Updated: 2023/09/26 17:32:12 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/09/28 12:16:30 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_ray(t_scene *s)
 	s->r.xo = 0;
 	s->r.yo = 0;
 	s->r.shade = 1;
-	s->r.rTan = 0;
+	s->r.r_tan = 0;
 }
 
 void	init(t_scene *s)

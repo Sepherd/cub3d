@@ -1,14 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tex_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 00:49:00 by sepherd           #+#    #+#             */
+/*   Updated: 2023/10/03 00:50:27 by sepherd          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 void	free_matrix(char ***matrix, int x, int y)
 {
-	for (int i = 0; i < x; i++)
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < x)
 	{
-		for (int j = 0; j < y; j++)
+		j = 0;
+		while (j < y)
 		{
 			free(matrix[i][j]);
+			j++;
 		}
 		free(matrix[i]);
+		i++;
 	}
 	free(matrix);
 }
@@ -44,7 +63,7 @@ int	array_alloc(t_scene *s, int id)
 
 void	save_tex_utils(t_scene *s, int fd, int id)
 {
-	int	i;
+	int		i;
 	char	*tmp;
 
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:04:06 by arecce            #+#    #+#             */
-/*   Updated: 2023/09/26 17:32:09 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/10/03 00:57:19 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,12 @@ int	ft_perror(char *msg)
 
 char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
-	// char	*d;
-	// char	*s;
-
-	// *d = dst;
-	// *s = src;
-	while (len > 0 && *src!= '\0')
+	while (len > 0 && *src != '\0')
 	{
 		*dst++ = *src++;
 		len--;
 	}
-	// while (len > 0)
-	// {
-	// 	*d++ = '\0';
-	// 	len--;
-	// }
-	return dst;
+	return (dst);
 }
 
 int	ft_strcmp(char *s1, char *s2)
@@ -60,33 +50,33 @@ void	my_mlx_pixel_put(t_scene *data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	dst = data->addr + (y * data->line_len + x * (data->bits / 8));
+	*(unsigned int *)dst = color;
 }
 
-int hexStringToInt(char *hexString)
+int	hex_string_to_int(char *hex)
 {
 	int		result;
-	char	currentChar;
-	int		digitValue;
+	char	curr_char;
+	int		value;
 
-	digitValue = 0;
+	value = 0;
 	result = 0;
-	if (hexString[0] == '0' && (hexString[1] == 'x' || hexString[1] == 'X'))
-		hexString += 2;
-	while (*hexString)
+	if (hex[0] == '0' && (hex[1] == 'x' || hex[1] == 'X'))
+		hex += 2;
+	while (*hex)
 	{
-		currentChar = *hexString;
-		if (currentChar >= '0' && currentChar <= '9')
-			digitValue = currentChar - '0';
-		else if (currentChar >= 'A' && currentChar <= 'F')
-			digitValue = currentChar - 'A' + 10;
-		else if (currentChar >= 'a' && currentChar <= 'f')
-			digitValue = currentChar - 'a' + 10;
+		curr_char = *hex;
+		if (curr_char >= '0' && curr_char <= '9')
+			value = curr_char - '0';
+		else if (curr_char >= 'A' && curr_char <= 'F')
+			value = curr_char - 'A' + 10;
+		else if (curr_char >= 'a' && curr_char <= 'f')
+			value = curr_char - 'a' + 10;
 		else
-			return (ft_perror("Carattere non valido nella stringa esadecimale"));
-		result = result * 16 + digitValue;
-		hexString++;
+			return (ft_perror("Carattere non valido nella stringa hex"));
+		result = result * 16 + value;
+		hex++;
 	}
 	return (result);
 }

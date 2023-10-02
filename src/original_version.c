@@ -2,35 +2,35 @@
 // {
 // 	int		vmt;
 // 	int 	hmt;
-// 	double	rtan;
+// 	double	r_tan;
 // 	int		dof_min;
 // 	if (s->f.map_x <= s->f.map_y)
 // 		dof_min = s->f.map_y;
 // 	else
 // 		dof_min = s->f.map_x;
-// 	s->r.ra = fixAng(s->pg.pa + 30);
+// 	s->r.ra = fix_ang(s->pg.pa + 30);
 // 	s->r.rr = 0;
 // 	while (s->r.rr < 640)
 // 	{
 // 		vmt = 0;
 // 		hmt = 0;
 // 		//VERTICAL
-// 		s->r.disV = 100000;
+// 		s->r.dis_v = 100000;
 // 		s->r.dof = 0;
-// 		rtan = tan(degToRad(s->r.ra));
-// 		if (cos(degToRad(s->r.ra)) > 0.001)
+// 		r_tan = tan(deg_to_rad(s->r.ra));
+// 		if (cos(deg_to_rad(s->r.ra)) > 0.001)
 // 		{
 // 			s->r.rx = (((int)s->pg.pos_x >> 6) << 6) + 64;
-// 			s->r.ry = (s->pg.pos_x - s->r.rx) * rtan + s->pg.pos_y;
+// 			s->r.ry = (s->pg.pos_x - s->r.rx) * r_tan + s->pg.pos_y;
 // 			s->r.xo = 64;
-// 			s->r.yo = -s->r.xo * rtan;
+// 			s->r.yo = -s->r.xo * r_tan;
 // 		}
-// 		else if (cos(degToRad(s->r.ra)) < -0.001)
+// 		else if (cos(deg_to_rad(s->r.ra)) < -0.001)
 // 		{
 // 			s->r.rx = (((int)s->pg.pos_x >> 6) << 6) - 0.0001;
-// 			s->r.ry = (s->pg.pos_x - s->r.rx)*rtan + s->pg.pos_y;
+// 			s->r.ry = (s->pg.pos_x - s->r.rx)*r_tan + s->pg.pos_y;
 // 			s->r.xo = -64;
-// 			s->r.yo = -s->r.xo * rtan;
+// 			s->r.yo = -s->r.xo * r_tan;
 // 		}
 // 		else
 // 		{
@@ -47,7 +47,7 @@
 // 			{
 // 				vmt = s->f.arr_map[s->r.mp] - 1;
 // 				s->r.dof = dof_min;
-// 				s->r.disV = cos(degToRad(s->r.ra)) * (s->r.rx - s->pg.pos_x) - sin(degToRad(s->r.ra)) * (s->r.ry - s->pg.pos_y);
+// 				s->r.dis_v = cos(deg_to_rad(s->r.ra)) * (s->r.rx - s->pg.pos_x) - sin(deg_to_rad(s->r.ra)) * (s->r.ry - s->pg.pos_y);
 // 			}
 // 			else
 // 			{
@@ -59,21 +59,21 @@
 		
 // 		//HORIZONTAL
 // 		s->r.dof = 0;
-// 		s->r.disH = 100000;
-// 		rtan = 1.0 / rtan;
-// 		if (sin(degToRad(s->r.ra)) > 0.001)
+// 		s->r.dis_h = 100000;
+// 		r_tan = 1.0 / r_tan;
+// 		if (sin(deg_to_rad(s->r.ra)) > 0.001)
 // 		{
 // 			s->r.ry = (((int)s->pg.pos_y >> 6) << 6) - 0.0001;
-// 			s->r.rx = (s->pg.pos_y - s->r.ry) * rtan + s->pg.pos_x;
+// 			s->r.rx = (s->pg.pos_y - s->r.ry) * r_tan + s->pg.pos_x;
 // 			s->r.yo = -64;
-// 			s->r.xo = -s->r.yo * rtan;
+// 			s->r.xo = -s->r.yo * r_tan;
 // 		}
-// 		else if (sin(degToRad(s->r.ra)) < -0.001)
+// 		else if (sin(deg_to_rad(s->r.ra)) < -0.001)
 // 		{
 // 			s->r.ry = (((int)s->pg.pos_y >> 6) << 6) + 64;
-// 			s->r.rx = (s->pg.pos_y - s->r.ry) * rtan + s->pg.pos_x;
+// 			s->r.rx = (s->pg.pos_y - s->r.ry) * r_tan + s->pg.pos_x;
 // 			s->r.yo = 64;
-// 			s->r.xo = -s->r.yo * rtan;
+// 			s->r.xo = -s->r.yo * r_tan;
 // 		}
 // 		else
 // 		{
@@ -90,7 +90,7 @@
 // 			{
 // 				hmt = s->f.arr_map[s->r.mp] - 1;
 // 				s->r.dof = dof_min;
-// 				s->r.disH = cos(degToRad(s->r.ra)) * (s->r.rx - s->pg.pos_x) - sin(degToRad(s->r.ra)) * (s->r.ry - s->pg.pos_y);
+// 				s->r.dis_h = cos(deg_to_rad(s->r.ra)) * (s->r.rx - s->pg.pos_x) - sin(deg_to_rad(s->r.ra)) * (s->r.ry - s->pg.pos_y);
 // 			}
 // 			else
 // 			{
@@ -100,9 +100,9 @@
 // 			}
 // 		}
 // 		s->r.shade = 1;
-// 		if (s->r.disV < s->r.disH)
+// 		if (s->r.dis_v < s->r.dis_h)
 // 		{
-// 		    if (cos(degToRad(s->r.ra)) > 0)
+// 		    if (cos(deg_to_rad(s->r.ra)) > 0)
 // 		        s->r.wall_side = 'E';
 // 		    else
 // 		        s->r.wall_side = 'W';
@@ -110,38 +110,38 @@
 // 		    s->r.shade = 0;
 // 		    s->r.rx = s->r.vx;
 // 		    s->r.ry = s->r.vy;
-// 		    s->r.disH = s->r.disV;
+// 		    s->r.dis_h = s->r.dis_v;
 // 		}
 // 		else
 // 		{
-// 		    if (sin(degToRad(s->r.ra)) > 0)
+// 		    if (sin(deg_to_rad(s->r.ra)) > 0)
 // 		        s->r.wall_side = 'N';
 // 		    else
 // 		        s->r.wall_side = 'S';
 // 		}
 // 		(void)hmt;
-// 		int	ca = fixAng(s->r.ra - s->pg.pa);
-// 		s->r.disH = s->r.disH * cos(degToRad(ca));
-// 		int	lineH = 64 * SCREEN_Y / s->r.disH;
+// 		int	ca = fix_ang(s->r.ra - s->pg.pa);
+// 		s->r.dis_h = s->r.dis_h * cos(deg_to_rad(ca));
+// 		int	line_h = 64 * SCREEN_Y / s->r.dis_h;
 // 		double	ty_off = 0;
-// 		ty_off = lineH / 2 + SCREEN_Y / 2;
+// 		ty_off = line_h / 2 + SCREEN_Y / 2;
 // 		if (ty_off > SCREEN_Y)
 // 			ty_off = SCREEN_Y;
-// 		// if (lineH > s->screenY)
-// 		// 	lineH = s->screenY;
-// 		int	lineOff = -lineH / 2 + SCREEN_Y / 2;
-// 		if (lineOff < 0)
-// 			lineOff = 0;
+// 		// if (line_h > s->screenY)
+// 		// 	line_h = s->screenY;
+// 		int	line_off = -line_h / 2 + SCREEN_Y / 2;
+// 		if (line_off < 0)
+// 			line_off = 0;
 // 		draw_floor_ceiling(s, 0, SCREEN_X / 2, s->f.c_color);
 // 		draw_floor_ceiling(s, (SCREEN_Y / 2) + 1, SCREEN_Y, s->f.f_color);
-// 		walls(s, s->r.rr, lineOff, lineH, ty_off);
+// 		walls(s, s->r.rr, line_off, line_h, ty_off);
 // 		// drawLine(s, s->r.rx, s->r.ry, 0x00FF0000);
-// 		s->r.ra = fixAng(s->r.ra - 0.1);
+// 		s->r.ra = fix_ang(s->r.ra - 0.1);
 // 		s->r.rr++;
 // 	}
 // }
 
-// int isPositionValid(t_scene *s, double x, double y)
+// int is_position_valid(t_scene *s, double x, double y)
 // {
 //     int mapX = (int)(x / 64);
 //     int mapY = (int)(y / 64);
@@ -160,16 +160,16 @@
 // 	if (s->pg.press_la) //s->pg.pos_x -= 0.05;
 // 	{
 // 		s->pg.pa += 0.7;
-// 		s->pg.pa = fixAng(s->pg.pa);
-// 		s->pg.pdx = cos(degToRad(s->pg.pa));
-// 		s->pg.pdy = -sin(degToRad(s->pg.pa));
+// 		s->pg.pa = fix_ang(s->pg.pa);
+// 		s->pg.pdx = cos(deg_to_rad(s->pg.pa));
+// 		s->pg.pdy = -sin(deg_to_rad(s->pg.pa));
 // 	}
 // 	if (s->pg.press_ra) //s->pg.pos_x += 0.05;
 // 	{
 // 		s->pg.pa -= 0.7;
-// 		s->pg.pa = fixAng(s->pg.pa);
-// 		s->pg.pdx = cos(degToRad(s->pg.pa));
-// 		s->pg.pdy = -sin(degToRad(s->pg.pa));
+// 		s->pg.pa = fix_ang(s->pg.pa);
+// 		s->pg.pdx = cos(deg_to_rad(s->pg.pa));
+// 		s->pg.pdy = -sin(deg_to_rad(s->pg.pa));
 // 	}
 // 	if (s->pg.pdx < 0)
 // 		s->pg.xo = -20;
@@ -209,7 +209,7 @@
 // 	{
 // 	    double newX = s->pg.pos_x + s->pg.pdy * 0.5;
 // 	    double newY = s->pg.pos_y - s->pg.pdx * 0.5;
-// 	    if (isPositionValid(s, newX, newY))
+// 	    if (is_position_valid(s, newX, newY))
 // 	    {
 // 	        s->pg.pos_x = newX;
 // 	        s->pg.pos_y = newY;
@@ -221,7 +221,7 @@
 // 	    double new_y = s->pg.pos_y + s->pg.pdx * 0.5;
 
 // 	    // Verifica se la nuova posizione è valida
-// 	    if (isPositionValid(s, new_x, new_y))
+// 	    if (is_position_valid(s, new_x, new_y))
 // 	    {
 // 	        s->pg.pos_x = new_x;
 // 	        s->pg.pos_y = new_y;
@@ -301,7 +301,7 @@
 // 		// s.pg.pos_x = 400;
 // 		// s.pg.pos_y = 300;
 // 		s.img = mlx_new_image(s.mlx, SCREEN_X, SCREEN_Y);
-// 		s.addr = mlx_get_data_addr(s.img, &s.bits_per_pixel, &s.line_length, &s.endian);
+// 		s.addr = mlx_get_data_addr(s.img, &s.bits, &s.line_len, &s.endian);
 // 		// my_mlx_pixel_put(&s, s.pg.pos_x, s.pg.pos_y, 0x00FF0000);
 // 		// drawMap(&s);
 // 		// draw_square(&s, 0, 0, 64, 0);

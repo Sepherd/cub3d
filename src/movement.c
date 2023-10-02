@@ -1,25 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movement.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 00:57:36 by sepherd           #+#    #+#             */
+/*   Updated: 2023/10/03 00:58:10 by sepherd          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
-void	rotation_camera(t_scene *s, int	dir)
+void	rotation_camera(t_scene *s, int dir)
 {
 	if (dir == 0)
 		s->pg.pa += 0.7;
 	else if (dir == 1)
 		s->pg.pa -= 0.7;
-	s->pg.pa = fixAng(s->pg.pa);
-	s->pg.pdx = cos(degToRad(s->pg.pa));
-	s->pg.pdy = -sin(degToRad(s->pg.pa));
+	s->pg.pa = fix_ang(s->pg.pa);
+	s->pg.pdx = cos(deg_to_rad(s->pg.pa));
+	s->pg.pdy = -sin(deg_to_rad(s->pg.pa));
 }
 
 void	move_left_right(t_scene *s, int dir)
 {
 	double	new_x;
 	double	new_y;
+
 	if (dir == 0)
 	{
 		new_x = s->pg.pos_x + s->pg.pdy * 0.7;
 		new_y = s->pg.pos_y - s->pg.pdx * 0.7;
-		if (isPositionValid(s, new_x, new_y))
+		if (is_position_valid(s, new_x, new_y))
 		{
 			s->pg.pos_x = new_x;
 			s->pg.pos_y = new_y;
@@ -29,7 +42,7 @@ void	move_left_right(t_scene *s, int dir)
 	{
 		new_x = s->pg.pos_x - s->pg.pdy * 0.7;
 		new_y = s->pg.pos_y + s->pg.pdx * 0.7;
-		if (isPositionValid(s, new_x, new_y))
+		if (is_position_valid(s, new_x, new_y))
 		{
 			s->pg.pos_x = new_x;
 			s->pg.pos_y = new_y;

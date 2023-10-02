@@ -1,4 +1,16 @@
-# include "../cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 00:40:20 by sepherd           #+#    #+#             */
+/*   Updated: 2023/10/03 00:47:39 by sepherd          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../cub3d.h"
 
 void	map_to_array(t_scene *s)
 {
@@ -83,8 +95,8 @@ int	border_check(t_scene *s)
 	i = 1;
 	while (i < s->f.m_size - 1)
 	{
-		if ((s->f.map[i][0] == 49 && s->f.map[i][ft_strlen(s->f.map[i]) - 2] == 49) \
-			&& delta_walls(s, i))
+		if ((s->f.map[i][0] == 49 && \
+			s->f.map[i][ft_strlen(s->f.map[i]) - 2] == 49) && delta_walls(s, i))
 			i++;
 		else
 			return (ft_perror("Mappa non chiusa nel modo corretto"));
@@ -92,7 +104,8 @@ int	border_check(t_scene *s)
 	k = 0;
 	while (s->f.map[i][k])
 	{
-		if (s->f.map[i][k] != 32 && s->f.map[i][k] != 49 && s->f.map[i][k] != 10)
+		if (s->f.map[i][k] != 32 && s->f.map[i][k] != 49 \
+			&& s->f.map[i][k] != 10)
 			return (ft_perror("Mappa non chiusa nel modo corretto"));
 		k++;
 	}

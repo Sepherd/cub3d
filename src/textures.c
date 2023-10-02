@@ -1,25 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textures.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 00:48:53 by sepherd           #+#    #+#             */
+/*   Updated: 2023/10/03 00:55:14 by sepherd          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
-
-// void	order_color(t_scene *s)
-// {
-// 	int	i;
-// 	int	index;
-
-// 	i = 0;
-// 	index = 0;
-// 	while (i < 64 * 64)
-// 	{
-// 		index = (i % 64) * 64 + i / 64;
-// 		s->t.order_col[index] = s->t.no_tex[i];
-// 		i++;
-// 	}
-// }
-
 
 void	save_color(t_scene *s, char *c, int id)
 {
 	int	i;
-	
+
 	i = 0;
 	while (i < s->t.tot_col)
 	{
@@ -28,13 +24,13 @@ void	save_color(t_scene *s, char *c, int id)
 		i++;
 	}
 	if (id == 0)
-		s->t.no_tex[s->t.index] = hexStringToInt(s->t.temp_color[i][1]);
+		s->t.no_tex[s->t.index] = hex_string_to_int(s->t.temp_color[i][1]);
 	else if (id == 1)
-		s->t.so_tex[s->t.index] = hexStringToInt(s->t.temp_color[i][1]);
+		s->t.so_tex[s->t.index] = hex_string_to_int(s->t.temp_color[i][1]);
 	else if (id == 2)
-		s->t.ea_tex[s->t.index] = hexStringToInt(s->t.temp_color[i][1]);
+		s->t.ea_tex[s->t.index] = hex_string_to_int(s->t.temp_color[i][1]);
 	else if (id == 3)
-		s->t.we_tex[s->t.index] = hexStringToInt(s->t.temp_color[i][1]);
+		s->t.we_tex[s->t.index] = hex_string_to_int(s->t.temp_color[i][1]);
 	s->t.index++;
 }
 
@@ -61,7 +57,6 @@ void	save_pixels(t_scene *s, char *tmp, int i, int id)
 	}
 }
 
-
 void	save_char_color(t_scene *s, char *tmp, int i, int id)
 {
 	int	t;
@@ -85,11 +80,7 @@ void	save_char_color(t_scene *s, char *tmp, int i, int id)
 	s->t.temp_color[i][1][0] = '0';
 	s->t.temp_color[i][1][1] = 'x';
 	while (tmp[t] != '\"')
-	{
-		s->t.temp_color[i][1][k] = tmp[t];
-		t++;
-		k++;
-	}
+		s->t.temp_color[i][1][k++] = tmp[t++];
 }
 
 void	texture_total_color(t_scene *s, char *line, int id)
@@ -140,4 +131,4 @@ int	save_textures(t_scene *s, int id, char *file)
 	s->t.index = 0;
 	close(fd);
 	return (1);
-};
+}

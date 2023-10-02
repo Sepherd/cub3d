@@ -1,4 +1,16 @@
-# include "../cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/03 00:40:11 by sepherd           #+#    #+#             */
+/*   Updated: 2023/10/03 00:48:36 by sepherd          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../cub3d.h"
 
 void	save_pg_position(t_scene *s, char direction, int i, int k)
 {
@@ -10,8 +22,8 @@ void	save_pg_position(t_scene *s, char direction, int i, int k)
 		s->pg.pa = 0;
 	else if (direction == 'W')
 		s->pg.pa = 180;
-	s->pg.pdx = cos(degToRad(s->pg.pa));
-	s->pg.pdy = -sin(degToRad(s->pg.pa));
+	s->pg.pdx = cos(deg_to_rad(s->pg.pa));
+	s->pg.pdy = -sin(deg_to_rad(s->pg.pa));
 	s->pg.pos_x = k * 64;
 	s->pg.pos_y = i * 64;
 	if (s->f.map_x <= s->f.map_y)
@@ -42,7 +54,7 @@ int	map_line_utils(t_scene *s, int i, int k)
 		k++;
 	else if ((s->f.map[i][k] == 'N' || s->f.map[i][k] == 'S'
 		|| s->f.map[i][k] == 'W' || s->f.map[i][k] == 'E') && count == 0)
-	{	
+	{
 		save_pg_position(s, s->f.map[i][k], i, k);
 		count = 1;
 		s->f.map[i][k] = '0';
