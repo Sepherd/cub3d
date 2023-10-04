@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 00:43:25 by sepherd           #+#    #+#             */
-/*   Updated: 2023/10/03 00:48:13 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/10/03 15:07:13 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,25 @@ int	map_size(t_scene *s)
 
 int	copy_map(t_scene *s, int i)
 {
-	int	k;
 	int	x;
 	int	y;
 
 	s->f.m_size = s->f.f_size - i;
 	s->f.map = malloc(sizeof(char **) * (s->f.m_size));
 	x = 0;
+	s->f.count = 0;
 	while (i < s->f.f_size)
 	{
-		k = 0;
 		y = 0;
 		s->f.map[x] = ft_calloc(ft_strlen(s->f.file[i]) + 1, sizeof(char));
-		while (s->f.file[i][k])
+		while (s->f.file[i][y])
 		{
-			if (s->f.file[i][k] == 32)
+			if (s->f.file[i][y] == 32)
 				s->f.map[x][y] = 49;
 			else
-				s->f.map[x][y] = s->f.file[i][k];
+				s->f.map[x][y] = s->f.file[i][y];
 			y++;
-			k++;
+			s->f.count++;
 		}
 		i++;
 		x++;

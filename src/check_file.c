@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:42:37 by arecce            #+#    #+#             */
-/*   Updated: 2023/10/03 00:37:11 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/10/03 11:46:45 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,13 @@ int	copy_file(t_scene *s, char *file)
 	line = get_next_line(fd);
 	s->f.file[i] = ft_calloc(ft_strlen(line) + 2, sizeof(char));
 	ft_strncpy(s->f.file[i++], line, ft_strlen(line));
-	while (line != NULL)
+	while (i < s->f.f_size)
 	{
 		free(line);
 		line = get_next_line(fd);
 		s->f.file[i] = ft_calloc(ft_strlen(line) + 1, sizeof(char));
+		if (s->f.file[i] == NULL)
+			return (ft_perror("Allocazione fallita"));
 		ft_strncpy(s->f.file[i], line, ft_strlen(line));
 		i++;
 	}

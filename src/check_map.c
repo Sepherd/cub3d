@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 00:40:20 by sepherd           #+#    #+#             */
-/*   Updated: 2023/10/03 00:47:39 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/10/04 11:48:04 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	map_line_check(t_scene *s)
 		i++;
 	}
 	s->f.map_y = s->f.m_size;
+	pair_the_map(s);
 	map_to_array(s);
 	return (1);
 }

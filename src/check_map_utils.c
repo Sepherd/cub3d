@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 00:40:11 by sepherd           #+#    #+#             */
-/*   Updated: 2023/10/03 00:48:36 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/10/04 11:46:31 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,29 @@ int	map_line_utils(t_scene *s, int i, int k)
 	else
 		k = 0;
 	return (k);
+}
+
+void	pair_the_map(t_scene *s)
+{
+	int		y;
+	int		x;
+	char	*tmp;
+
+	y = 0;
+	while (y < s->f.map_y)
+	{
+		if ((int)ft_strlen(s->f.map[y]) - 1 < s->f.map_x)
+		{
+			tmp = ft_calloc(ft_strlen(s->f.map[y]) + 1, sizeof(char));
+			ft_strncpy(tmp, s->f.map[y], ft_strlen(s->f.map[y]));
+			s->f.map[y] = ft_calloc(s->f.map_x + 1, sizeof(char));
+			x = -1;
+			while (++x < (int)ft_strlen(tmp) - 1)
+				s->f.map[y][x] = tmp[x];
+			while (x < s->f.map_x)
+				s->f.map[y][x++] = 49;
+			free(tmp);
+		}
+		y++;
+	}
 }

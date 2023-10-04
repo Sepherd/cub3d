@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:42:48 by arecce            #+#    #+#             */
-/*   Updated: 2023/10/03 00:56:29 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/10/04 11:27:27 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,6 @@ typedef struct s_ray
 
 typedef struct s_file
 {
-	char		*no_path;
-	char		*so_path;
-	char		*we_path;
-	char		*ea_path;
 	int			no_on;
 	int			so_on;
 	int			we_on;
@@ -111,6 +107,7 @@ typedef struct s_file
 	char		**map;
 	int			tot;
 	int			m_size;
+	int			count;
 	int			map_x;
 	int			map_y;
 	int			*arr_map;
@@ -179,6 +176,7 @@ int		key(int keycode, t_scene *s);
 int		keyup(int keycode, t_scene *s);
 void	movement(int keycode, t_scene *s);
 void	convert_rgb(t_scene *s);
+void	pair_the_map(t_scene *s);
 
 /***** CHECK *****/
 void	map_to_array_check(t_scene *s, int y, int x, int i);
