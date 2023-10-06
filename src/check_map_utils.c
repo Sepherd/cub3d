@@ -22,6 +22,7 @@ void	save_pg_position(t_scene *s, char direction, int i, int k)
 		s->pg.pa = 0;
 	else if (direction == 'W')
 		s->pg.pa = 180;
+	s->pg.dasein = 1;
 	s->pg.pdx = cos(deg_to_rad(s->pg.pa));
 	s->pg.pdy = -sin(deg_to_rad(s->pg.pa));
 	s->pg.pos_x = k * 64;

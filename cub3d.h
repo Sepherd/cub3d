@@ -121,6 +121,7 @@ typedef struct s_pg
 	double	pdx;
 	double	pdy;
 	double	pa;
+	int		dasein;
 	int		press_s;
 	int		press_a;
 	int		press_d;

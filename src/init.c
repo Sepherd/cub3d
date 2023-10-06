@@ -51,5 +51,6 @@ void	init(t_scene *s)
 	s->pg.press_la = 0;
 	s->pg.press_ra = 0;
 	s->t.index = 0;
+	s->pg.dasein = 0;
 	init_ray(s);
 }

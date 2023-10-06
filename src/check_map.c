@@ -56,6 +56,8 @@ int	map_line_check(t_scene *s)
 	s->f.map_y = s->f.m_size;
 	pair_the_map(s);
 	map_to_array(s);
+	if (!s->pg.dasein)
+		return (ft_perror("Personaggio non presente"));
 	return (1);
 }
 
