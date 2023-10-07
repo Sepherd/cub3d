@@ -79,6 +79,7 @@ void	pair_the_map(t_scene *s)
 		{
 			tmp = ft_calloc(ft_strlen(s->f.map[y]) + 1, sizeof(char));
 			ft_strncpy(tmp, s->f.map[y], ft_strlen(s->f.map[y]));
+			free(s->f.map[y]);
 			s->f.map[y] = ft_calloc(s->f.map_x + 1, sizeof(char));
 			x = -1;
 			while (++x < (int)ft_strlen(tmp) - 1)

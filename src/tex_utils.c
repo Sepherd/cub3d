@@ -74,7 +74,8 @@ void	save_tex_utils(t_scene *s, int fd, int id)
 		free(tmp);
 		i++;
 	}
-	get_next_line(fd);
+	tmp = get_next_line(fd);
+	free(tmp);
 	tmp = get_next_line(fd);
 	i = 0;
 	while (i < TEX_Y)

@@ -115,14 +115,20 @@ int	save_textures(t_scene *s, int id, char *file)
 {
 	int		fd;
 	int		i;
+	char	*tmp;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		ft_perror("Impossibile leggere il file .xpm");
 	i = 3;
 	while (i--)
-		get_next_line(fd);
-	texture_total_color(s, get_next_line(fd), id);
+	{
+		tmp = get_next_line(fd);
+		free(tmp);
+	}
+	tmp = get_next_line(fd);
+	texture_total_color(s, tmp, id);
+	free(tmp);
 	s->t.temp_color = (char ***)malloc(sizeof(char **) * s->t.tot_col);
 	s->t.temp_pixel = (char ***)malloc(sizeof(char **) * TEX_Y);
 	save_tex_utils(s, fd, id);

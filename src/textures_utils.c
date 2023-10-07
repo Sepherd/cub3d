@@ -115,7 +115,9 @@ int	get_texture_path(t_scene *s, int i, int k, int id)
 					return (ft_perror("Path non valido"));
 				k++;
 			}
-			return (save_texture_path(s, tmp, id));
+			j = save_texture_path(s, tmp, id);
+			free(tmp);
+			return (j);
 		}
 	}
 	return (save_texture_color(s, i, k, id));
