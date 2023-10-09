@@ -6,11 +6,25 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 14:04:06 by arecce            #+#    #+#             */
-/*   Updated: 2023/09/28 12:16:30 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/10/08 16:29:29 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	init_minimap(t_scene *s)
+{
+	s->m.end_x = 0;
+	s->m.end_y = 0;
+	s->m.grid = 10;
+	s->m.mini_px = 0;
+	s->m.mini_py = 0;
+	s->m.start_x = 0;
+	s->m.start_y = 0;
+	s->m.size = 100;
+	s->m.p_dx = 0;
+	s->m.p_dy = 0;
+}
 
 void	init_ray(t_scene *s)
 {
@@ -25,6 +39,7 @@ void	init_ray(t_scene *s)
 	s->r.yo = 0;
 	s->r.shade = 1;
 	s->r.r_tan = 0;
+	init_minimap(s);
 }
 
 void	init(t_scene *s)

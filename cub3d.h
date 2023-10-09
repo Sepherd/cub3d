@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 17:42:48 by arecce            #+#    #+#             */
-/*   Updated: 2023/10/04 11:27:27 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/10/09 12:09:29 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,26 @@
 # define TEX_Y 64
 # define SCREEN_X 640
 # define SCREEN_Y 640
+# define BG_LT 120
+# define BL_LT 10
+# define M_BG 0x0000FF
+# define M_WA 0xFFFFFF
+# define M_PL 0xFF0000
+# define M_FL 0x000000
+
+typedef struct s_minimap
+{
+	int		mini_px;
+	int		mini_py;
+	int		grid;
+	int		start_x;
+	int		end_x;
+	int		start_y;
+	int		end_y;
+	int		size;
+	double	p_dx;
+	double	p_dy;
+}				t_minimap;
 
 typedef struct s_textures
 {
@@ -155,6 +175,7 @@ typedef struct s_scene
 	t_pg		pg;
 	t_file		f;
 	t_ray		r;
+	t_minimap	m;
 }				t_scene;
 
 /***** INIT *****/
@@ -214,7 +235,7 @@ void	draw_walls(t_scene *s, int y, int line_h, double ty_off);
 // void	 drawLine(t_scene *s, int x1, int y1, int angle);
 // void	drawLine(t_scene *s, int ex, int ey, int color);
 
-	/***** RAY *****/
+/***** RAY *****/
 double	deg_to_rad(double a);
 double	fix_ang(double a);
 void	ray(t_scene *s);
@@ -222,5 +243,8 @@ double	deg_to_rad(double a);
 double	fix_ang(double a);
 void	ray_vertical_dof(t_scene *s);
 void	ray_horizontal_dof(t_scene *s);
+
+/***** MINIMAP *****/
+void	draw_minimap(t_scene *s);
 
 #endif

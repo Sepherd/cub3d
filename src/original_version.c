@@ -415,7 +415,7 @@
 // 	int x = 0;
 // 	int y = radius;
 // 	int d = 3 - 2 * radius;
-	
+
 // 	while (x <= y) {
 // 		for (int i = centerX - x; i <= centerX + x; i++) {
 // 			my_mlx_pixel_put(s, i, centerY + y, color);
@@ -432,15 +432,13 @@
 // 		my_mlx_pixel_put(s, centerX + y, centerY + x, color);
 // 		my_mlx_pixel_put(s, centerX - y, centerY + x, color);
 // 		my_mlx_pixel_put(s, centerX + y, centerY - x, color);
-// 		my_mlx_pixel_put(s, centerX - y, centerY - x, color);
-		
+// 		my_mlx_pixel_put(s, centerX - y, centerY - x, color);	
 // 		if (d < 0) {
 // 			d += 4 * x + 6;
 // 		} else {
 // 			d += 4 * (x - y) + 10;
 // 			y--;
 // 		}
-		
 // 		x++;
 // 	}
 // 	mlx_put_image_to_window(s->mlx, s->win, s->img, 0, 0);
