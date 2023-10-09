@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 00:43:25 by sepherd           #+#    #+#             */
-/*   Updated: 2023/10/09 18:50:51 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/10/10 00:36:58 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	copy_map_utils(t_scene *s, int i)
 		y = 0;
 		while (s->f.file[i][y])
 		{
-			if ((s->f.file[i][y] == 32 && (x == 0 || i == s->f.f_size - 1 || y == 0 || y == (int)ft_strlen(s->f.file[i] - 2))))
+			if ((s->f.file[i][y] == 32 && (x == 0 || i == s->f.f_size - 1 \
+				|| y == 0 || y == (int)ft_strlen(s->f.file[i] - 2))))
 				s->f.map[x][y] = 49;
 			else if (s->f.file[i][y] == 32)
 				s->f.map[x][y] = 48;
@@ -32,11 +33,9 @@ void	copy_map_utils(t_scene *s, int i)
 				s->f.map[x][y] = s->f.file[i][y];
 			y++;
 		}
-		ft_printf("%s", s->f.map[x]);
 		i++;
 		x++;
 	}
-	ft_printf("\n");
 }
 
 int	copy_map(t_scene *s, int i)
