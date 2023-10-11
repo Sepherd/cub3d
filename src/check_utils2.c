@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arecce <arecce@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 00:43:25 by sepherd           #+#    #+#             */
-/*   Updated: 2023/10/10 00:36:58 by sepherd          ###   ########.fr       */
+/*   Created: 2023/10/11 16:56:26 by arecce            #+#    #+#             */
+/*   Updated: 2023/10/11 17:14:13 by arecce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	copy_map_utils(t_scene *s, int i)
 		while (s->f.file[i][y])
 		{
 			if ((s->f.file[i][y] == 32 && (x == 0 || i == s->f.f_size - 1 \
-				|| y == 0 || y == (int)ft_strlen(s->f.file[i] - 2))))
+				|| y == 0 || y == (int)ft_strlen(s->f.file[i]) - 2)))
 				s->f.map[x][y] = 49;
 			else if (s->f.file[i][y] == 32)
 				s->f.map[x][y] = 48;
@@ -73,17 +73,17 @@ int	get_path_utils(t_scene *s, int i, int k)
 
 int	check_id(t_scene *s, char *tmp, int i, int k)
 {
-	if (ft_strcmp(tmp, NO_ID) && s->f.no_on == 0)
+	if (ft_strcmp(tmp, "NO") && s->f.no_on == 0)
 		return (get_texture_path(s, i, k, 0));
-	else if (ft_strcmp(tmp, SO_ID) && s->f.so_on == 0)
+	else if (ft_strcmp(tmp, "SO") && s->f.so_on == 0)
 		return (get_texture_path(s, i, k, 1));
-	else if (ft_strcmp(tmp, EA_ID) && s->f.ea_on == 0)
+	else if (ft_strcmp(tmp, "EA") && s->f.ea_on == 0)
 		return (get_texture_path(s, i, k, 2));
-	else if (ft_strcmp(tmp, WE_ID) && s->f.we_on == 0)
+	else if (ft_strcmp(tmp, "WE") && s->f.we_on == 0)
 		return (get_texture_path(s, i, k, 3));
-	else if (ft_strcmp(tmp, F_ID) && s->f.f_on == 0)
+	else if (ft_strcmp(tmp, "F") && s->f.f_on == 0)
 		return (get_texture_path(s, i, k, 4));
-	else if (ft_strcmp(tmp, C_ID) && s->f.c_on == 0)
+	else if (ft_strcmp(tmp, "C") && s->f.c_on == 0)
 		return (get_texture_path(s, i, k, 5));
 	return (ft_perror("ID non valido"));
 }

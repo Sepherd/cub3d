@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arecce <arecce@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 14:04:06 by arecce            #+#    #+#             */
-/*   Updated: 2023/10/08 16:29:29 by sepherd          ###   ########.fr       */
+/*   Created: 2023/10/11 16:56:42 by arecce            #+#    #+#             */
+/*   Updated: 2023/10/11 16:56:44 by arecce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	init(t_scene *s)
 	s->f.tot = 0;
 	s->f.map_x = 0;
 	s->f.map_y = 0;
+	s->f.pg_count = 0;
 	s->pg.pos_x = 0.0;
 	s->pg.pos_y = 0.0;
 	s->pg.yo = 0;

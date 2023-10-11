@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arecce <arecce@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/26 17:42:48 by arecce            #+#    #+#             */
-/*   Updated: 2023/10/09 12:09:29 by sepherd          ###   ########.fr       */
+/*   Created: 2023/10/11 16:58:01 by arecce            #+#    #+#             */
+/*   Updated: 2023/10/11 18:33:39 by arecce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft/libft.h"
 # include <math.h>
 # include <stdio.h>
+
 // # include "keymap/key_linux.h"
 // # include "mlx_linux/mlx.h"
 
@@ -131,6 +132,7 @@ typedef struct s_file
 	int			map_x;
 	int			map_y;
 	int			*arr_map;
+	int			pg_count;
 }				t_file;
 
 typedef struct s_pg
@@ -197,6 +199,7 @@ int		mov(t_scene *s);
 int		key(int keycode, t_scene *s);
 int		keyup(int keycode, t_scene *s);
 void	movement(int keycode, t_scene *s);
+int		dist_from_wall(t_scene *s, double x, double y, double distance);
 void	convert_rgb(t_scene *s);
 void	pair_the_map(t_scene *s);
 

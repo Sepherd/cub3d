@@ -32,8 +32,8 @@ char	*ft_result(char *num, const char *digit, int len, int n)
 	{
 		while (n > 0)
 		{
-		num[--len] = digit[n % 10];
-		n /= 10;
+			num[--len] = digit[n % 10];
+			n /= 10;
 		}
 	}
 	return (num);

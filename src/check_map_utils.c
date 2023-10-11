@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arecce <arecce@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/03 00:40:11 by sepherd           #+#    #+#             */
-/*   Updated: 2023/10/04 11:46:31 by sepherd          ###   ########.fr       */
+/*   Created: 2023/10/11 16:56:00 by arecce            #+#    #+#             */
+/*   Updated: 2023/10/11 17:21:40 by arecce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	save_pg_position(t_scene *s, char direction, int i, int k)
 	s->pg.dasein = 1;
 	s->pg.pdx = cos(deg_to_rad(s->pg.pa));
 	s->pg.pdy = -sin(deg_to_rad(s->pg.pa));
-	s->pg.pos_x = k * 64;
-	s->pg.pos_y = i * 64;
+	s->pg.pos_x = (k * 64) + 32;
+	s->pg.pos_y = (i * 64) + 32;
 	if (s->f.map_x <= s->f.map_y)
 		s->r.dof_min = s->f.map_y;
 	else
@@ -46,18 +46,17 @@ void	map_to_array_check(t_scene *s, int y, int x, int i)
 
 int	map_line_utils(t_scene *s, int i, int k)
 {
-	int	count;
-
-	count = 0;
 	if ((int)ft_strlen(s->f.map[i]) - 1 > s->f.map_x)
 		s->f.map_x = ft_strlen(s->f.map[i]) - 1;
 	if (s->f.map[i][k] == 48 || s->f.map[i][k] == 49)
 		k++;
 	else if ((s->f.map[i][k] == 'N' || s->f.map[i][k] == 'S'
-		|| s->f.map[i][k] == 'W' || s->f.map[i][k] == 'E') && count == 0)
+		|| s->f.map[i][k] == 'W' || s->f.map[i][k] == 'E'))
 	{
+		if (s->f.pg_count != 0)
+			return (ft_perror("Errato numero di personaggi"));
 		save_pg_position(s, s->f.map[i][k], i, k);
-		count = 1;
+		s->f.pg_count = 1;
 		s->f.map[i][k] = '0';
 		k++;
 	}

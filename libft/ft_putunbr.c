@@ -24,10 +24,8 @@ void	ft_unconvert(unsigned int nb)
 int	ft_putunbr(unsigned int nb)
 {
 	int			len_print;
-	// int			print;
 
 	len_print = ft_numlen(nb);
-	// print = 0;
 	if (nb == 0)
 		ft_putchar('0');
 	else

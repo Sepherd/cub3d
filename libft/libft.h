@@ -14,14 +14,14 @@
 # define LIBFT_H
 
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1
+#  define BUFFER_SIZE 1
 # endif
 
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdarg.h>
-#include <stdint.h>
+# include <stdint.h>
 
 typedef struct s_list
 {

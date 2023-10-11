@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arecce <arecce@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 14:04:06 by arecce            #+#    #+#             */
-/*   Updated: 2023/10/03 00:57:19 by sepherd          ###   ########.fr       */
+/*   Created: 2023/10/11 16:57:38 by arecce            #+#    #+#             */
+/*   Updated: 2023/10/11 17:17:24 by arecce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,17 @@ int	ft_strcmp(char *s1, char *s2)
 	i = 0;
 	if (!s1 || !s2)
 		return (0);
-	while (s1[i] && s2[i])
+	if (ft_strlen(s1) == ft_strlen(s2))
 	{
-		if (s1[i] != s2[i])
-			return (0);
-		i++;
+		while (s1[i] && s2[i])
+		{
+			if (s1[i] != s2[i])
+				return (0);
+			i++;
+		}
+		return (1);
 	}
-	return (1);
+	return (0);
 }
 
 void	my_mlx_pixel_put(t_scene *data, int x, int y, int color)
