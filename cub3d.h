@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arecce <arecce@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:58:01 by arecce            #+#    #+#             */
-/*   Updated: 2023/10/11 18:33:39 by arecce           ###   ########.fr       */
+/*   Updated: 2023/10/12 16:44:35 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,8 @@ typedef struct s_pg
 	int		press_w;
 	int		press_la;
 	int		press_ra;
-	int		xo;
-	int		yo;
+	double	xo;
+	double	yo;
 	int		ipx;
 	int		ipy;
 	int		ipx_add_xo;

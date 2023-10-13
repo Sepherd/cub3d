@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arecce <arecce@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:56:42 by arecce            #+#    #+#             */
-/*   Updated: 2023/10/11 16:56:44 by arecce           ###   ########.fr       */
+/*   Updated: 2023/10/12 16:44:56 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	init(t_scene *s)
 	s->f.pg_count = 0;
 	s->pg.pos_x = 0.0;
 	s->pg.pos_y = 0.0;
-	s->pg.yo = 0;
-	s->pg.xo = 0;
+	s->pg.yo = 0.0;
+	s->pg.xo = 0.0;
 	s->pg.press_s = 0;
 	s->pg.press_a = 0;
 	s->pg.press_d = 0;

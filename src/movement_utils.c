@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arecce <arecce@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:47:27 by arecce            #+#    #+#             */
-/*   Updated: 2023/10/11 18:47:28 by arecce           ###   ########.fr       */
+/*   Updated: 2023/10/12 16:42:39 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	mov_utils(t_scene *s)
 		s->pg.yo = -20;
 	else
 		s->pg.yo = 20;
-	s->pg.ipx = s->pg.pos_x / 64.0;
-	s->pg.ipx_add_xo = (s->pg.pos_x + s->pg.xo) / 64.0;
-	s->pg.ipx_sub_xo = (s->pg.pos_x - s->pg.xo) / 64.0;
-	s->pg.ipy = s->pg.pos_y / 64.0;
-	s->pg.ipy_add_yo = (s->pg.pos_y + s->pg.yo) / 64.0;
-	s->pg.ipy_sub_yo = (s->pg.pos_y - s->pg.yo) / 64.0;
+	s->pg.ipx = (int)(s->pg.pos_x / 64.0);
+	s->pg.ipx_add_xo = (int)((s->pg.pos_x + s->pg.xo) / 64.0);
+	s->pg.ipx_sub_xo = (int)((s->pg.pos_x - s->pg.xo) / 64.0);
+	s->pg.ipy = (int)(s->pg.pos_y / 64.0);
+	s->pg.ipy_add_yo = (int)((s->pg.pos_y + s->pg.yo) / 64.0);
+	s->pg.ipy_sub_yo = (int)((s->pg.pos_y - s->pg.yo) / 64.0);
 }
 
 int	is_position_valid(t_scene *s, double x, double y)
