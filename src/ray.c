@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arecce <arecce@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:57:19 by arecce            #+#    #+#             */
-/*   Updated: 2023/10/11 16:57:21 by arecce           ###   ########.fr       */
+/*   Updated: 2023/10/14 18:58:30 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,6 @@ void	ray(t_scene *s)
 		s->r.ra = fix_ang(s->r.ra - 0.1);
 		s->r.rr++;
 	}
-	draw_minimap(s);
+	if (s->f.map_x > 9 && s->f.map_y > 9)
+		draw_minimap(s);
 }

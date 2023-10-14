@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:47:35 by arecce            #+#    #+#             */
-/*   Updated: 2023/10/13 12:06:07 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:46:15 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,19 @@ void	rotation_camera(t_scene *s, int dir)
 
 void	move_left_right(t_scene *s, int dir)
 {
-	double	new_x;
-	double	new_y;
-
 	if (dir == 0)
 	{
-		new_x = s->pg.pos_x + s->pg.pdy * 0.7;
-		new_y = s->pg.pos_y - s->pg.pdx * 0.7;
-		if (is_position_valid(s, new_x, new_y))
-		{
-			s->pg.pos_x = new_x;
-			s->pg.pos_y = new_y;
-		}
+		if (s->f.arr_map[s->pg.ipy * (s->f.map_x) + s->pg.side_add_xo] == 0)
+			s->pg.pos_x += s->pg.pdy * 0.4;
+		if (s->f.arr_map[s->pg.side_sub_yo * (s->f.map_x) + s->pg.ipx] == 0)
+			s->pg.pos_y -= s->pg.pdx * 0.4;
 	}
 	else if (dir == 1)
 	{
-		new_x = s->pg.pos_x - s->pg.pdy * 0.7;
-		new_y = s->pg.pos_y + s->pg.pdx * 0.7;
-		if (is_position_valid(s, new_x, new_y))
-		{
-			s->pg.pos_x = new_x;
-			s->pg.pos_y = new_y;
-		}
+		if (s->f.arr_map[s->pg.ipy * (s->f.map_x) + s->pg.side_sub_xo] == 0)
+			s->pg.pos_x -= s->pg.pdy * 0.4;
+		if (s->f.arr_map[s->pg.side_add_yo * (s->f.map_x) + s->pg.ipx] == 0)
+			s->pg.pos_y += s->pg.pdx * 0.4;
 	}
 }
 
@@ -54,17 +45,17 @@ void	move_forward_backward(t_scene *s, int dir)
 {
 	if (dir == 0)
 	{
-		if (s->f.arr_map[s->pg.ipy * (s->f.map_x) + s->pg.ipx_sub_xo] == 0)
-			s->pg.pos_x -= s->pg.pdx;
-		if (s->f.arr_map[s->pg.ipy_sub_yo * (s->f.map_x) + s->pg.ipx] == 0)
-			s->pg.pos_y -= s->pg.pdy;
+		if (s->f.arr_map[s->pg.ipy * (s->f.map_x) + s->pg.sub_xo] == 0)
+			s->pg.pos_x -= s->pg.pdx * 0.7;
+		if (s->f.arr_map[s->pg.sub_yo * (s->f.map_x) + s->pg.ipx] == 0)
+			s->pg.pos_y -= s->pg.pdy * 0.7;
 	}
 	else if (dir == 1)
 	{
-		if (s->f.arr_map[s->pg.ipy * (s->f.map_x) + s->pg.ipx_add_xo] == 0)
-			s->pg.pos_x += s->pg.pdx;
-		if (s->f.arr_map[s->pg.ipy_add_yo * (s->f.map_x) + s->pg.ipx] == 0)
-			s->pg.pos_y += s->pg.pdy;
+		if (s->f.arr_map[s->pg.ipy * (s->f.map_x) + s->pg.add_xo] == 0)
+			s->pg.pos_x += s->pg.pdx * 0.7;
+		if (s->f.arr_map[s->pg.add_yo * (s->f.map_x) + s->pg.ipx] == 0)
+			s->pg.pos_y += s->pg.pdy * 0.7;
 	}
 }
 
@@ -75,6 +66,7 @@ int	mov(t_scene *s)
 	if (s->pg.press_ra)
 		rotation_camera(s, 1);
 	mov_utils(s);
+	side_utils(s);
 	if (s->pg.press_s)
 		move_forward_backward(s, 0);
 	if (s->pg.press_w)

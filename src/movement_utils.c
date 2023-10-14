@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 18:47:27 by arecce            #+#    #+#             */
-/*   Updated: 2023/10/12 16:42:39 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:46:30 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,27 @@ void	mov_utils(t_scene *s)
 	else
 		s->pg.yo = 20;
 	s->pg.ipx = (int)(s->pg.pos_x / 64.0);
-	s->pg.ipx_add_xo = (int)((s->pg.pos_x + s->pg.xo) / 64.0);
-	s->pg.ipx_sub_xo = (int)((s->pg.pos_x - s->pg.xo) / 64.0);
+	s->pg.add_xo = (int)((s->pg.pos_x + s->pg.xo) / 64.0);
+	s->pg.sub_xo = (int)((s->pg.pos_x - s->pg.xo) / 64.0);
 	s->pg.ipy = (int)(s->pg.pos_y / 64.0);
-	s->pg.ipy_add_yo = (int)((s->pg.pos_y + s->pg.yo) / 64.0);
-	s->pg.ipy_sub_yo = (int)((s->pg.pos_y - s->pg.yo) / 64.0);
+	s->pg.add_yo = (int)((s->pg.pos_y + s->pg.yo) / 64.0);
+	s->pg.sub_yo = (int)((s->pg.pos_y - s->pg.yo) / 64.0);
 }
 
-int	is_position_valid(t_scene *s, double x, double y)
+void	side_utils(t_scene *s)
 {
-	int	map_x;
-	int	map_y;
-
-	map_x = (int)(x / 64);
-	map_y = (int)(y / 64);
-	if ((map_x < 0 || map_x >= s->f.map_x || map_y < 0 || map_y >= s->f.map_y)
-		|| (s->f.map[map_y][map_x] == 49))
-		return (0);
-	return (1);
+	if (s->pg.pdy < 0)
+		s->pg.side_xo = -20;
+	else
+		s->pg.side_xo = 20;
+	if (s->pg.pdx < 0)
+		s->pg.side_yo = -20;
+	else
+		s->pg.side_yo = 20;
+	s->pg.side_add_xo = (int)((s->pg.pos_x + s->pg.side_xo) / 64.0);
+	s->pg.side_sub_xo = (int)((s->pg.pos_x - s->pg.side_xo) / 64.0);
+	s->pg.side_add_yo = (int)((s->pg.pos_y + s->pg.side_yo) / 64.0);
+	s->pg.side_sub_yo = (int)((s->pg.pos_y - s->pg.side_yo) / 64.0);
 }
 
 int	keyup(int keycode, t_scene *s)

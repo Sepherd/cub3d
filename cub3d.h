@@ -6,7 +6,7 @@
 /*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:58:01 by arecce            #+#    #+#             */
-/*   Updated: 2023/10/12 16:44:35 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/10/14 19:46:39 by sepherd          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #  include "mlx_linux/mlx.h"
 # endif
 
-# define PI 3.1415926535
+# define PI 3.14159265358979323846
 // # define P2 PI/2
 // # define P3 3*PI/2
 // # define DR	0.0174533
@@ -154,10 +154,16 @@ typedef struct s_pg
 	double	yo;
 	int		ipx;
 	int		ipy;
-	int		ipx_add_xo;
-	int		ipx_sub_xo;
-	int		ipy_add_yo;
-	int		ipy_sub_yo;
+	int		add_xo;
+	int		sub_xo;
+	int		add_yo;
+	int		sub_yo;
+	int		side_xo;
+	int		side_yo;
+	int		side_add_xo;
+	int		side_sub_xo;
+	int		side_add_yo;
+	int		side_sub_yo;
 }				t_pg;
 
 typedef struct s_scene
@@ -193,6 +199,7 @@ int		hex_string_to_int(char *hex);
 void	my_mlx_pixel_put(t_scene *data, int x, int y, int color);
 int		exit_game(t_scene *s);
 void	mov_utils(t_scene *s);
+void	side_utils(t_scene *s);
 int		get_path_utils(t_scene *s, int i, int k);
 int		is_position_valid(t_scene *s, double x, double y);
 int		mov(t_scene *s);
