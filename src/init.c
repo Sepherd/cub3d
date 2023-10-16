@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sepherd <sepherd@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arecce <arecce@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:56:42 by arecce            #+#    #+#             */
-/*   Updated: 2023/10/14 19:50:58 by sepherd          ###   ########.fr       */
+/*   Updated: 2023/10/16 18:16:52 by arecce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	init_mov(t_scene *s)
 void	init(t_scene *s)
 {
 	s->f.f_size = 0;
+	s->f.m_size = 0;
 	s->f.ea_on = 0;
 	s->f.we_on = 0;
 	s->f.so_on = 0;

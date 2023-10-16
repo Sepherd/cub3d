@@ -6,7 +6,7 @@
 /*   By: arecce <arecce@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:56:00 by arecce            #+#    #+#             */
-/*   Updated: 2023/10/11 17:21:40 by arecce           ###   ########.fr       */
+/*   Updated: 2023/10/16 19:29:02 by arecce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	save_pg_position(t_scene *s, char direction, int i, int k)
 	s->pg.pdy = -sin(deg_to_rad(s->pg.pa));
 	s->pg.pos_x = (k * 64) + 32;
 	s->pg.pos_y = (i * 64) + 32;
-	if (s->f.map_x <= s->f.map_y)
-		s->r.dof_min = s->f.map_y;
+	if (s->f.map_x <= s->f.m_size)
+		s->r.dof_min = s->f.m_size;
 	else
 		s->r.dof_min = s->f.map_x;
 }

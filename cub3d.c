@@ -6,13 +6,13 @@
 /*   By: arecce <arecce@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:57:53 by arecce            #+#    #+#             */
-/*   Updated: 2023/10/11 16:57:55 by arecce           ###   ########.fr       */
+/*   Updated: 2023/10/16 18:36:09 by arecce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_memory(t_scene *s)
+void	free_memory(t_scene *s, int u)
 {
 	int	i;
 
@@ -20,20 +20,23 @@ void	free_memory(t_scene *s)
 	while (i < s->f.f_size)
 		free(s->f.file[i++]);
 	free(s->f.file);
-	i = 0;
-	while (i < s->f.m_size)
-		free(s->f.map[i++]);
-	free(s->f.map);
-	free(s->f.arr_map);
-	free(s->t.ea_tex);
-	free(s->t.no_tex);
-	free(s->t.so_tex);
-	free(s->t.we_tex);
+	if (u != 0)
+	{
+		i = 0;
+		while (i < s->f.m_size)
+			free(s->f.map[i++]);
+		free(s->f.map);
+		free(s->f.arr_map);
+		free(s->t.ea_tex);
+		free(s->t.no_tex);
+		free(s->t.so_tex);
+		free(s->t.we_tex);
+	}
 }
 
 int	exit_game(t_scene *s)
 {
-	free_memory(s);
+	free_memory(s, 1);
 	mlx_destroy_window(s->mlx, s->win);
 	exit(0);
 	return (0);
@@ -48,6 +51,11 @@ int	main(int ac, char **av)
 		ft_perror("Errato numero di argomenti");
 	else if (check_file_type(&s, av[1], ".cub", 0))
 	{
+		if (s.f.m_size == 0)
+		{
+			free_memory(&s, 0);
+			return (ft_perror("Mappa assente"));
+		}
 		s.mlx = mlx_init();
 		s.win = mlx_new_window(s.mlx, SCREEN_X, SCREEN_Y, "CUB3D");
 		s.img = mlx_new_image(s.mlx, SCREEN_X, SCREEN_Y);

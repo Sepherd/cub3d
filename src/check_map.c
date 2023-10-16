@@ -6,7 +6,7 @@
 /*   By: arecce <arecce@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 16:56:09 by arecce            #+#    #+#             */
-/*   Updated: 2023/10/11 16:56:11 by arecce           ###   ########.fr       */
+/*   Updated: 2023/10/16 19:10:54 by arecce           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	map_line_check(t_scene *s)
 	size_t	k;
 
 	i = 1;
-	while (i < s->f.m_size - 2)
+	while (i < s->f.m_size - 1)
 	{
 		k = 1;
 		while (k < ft_strlen(s->f.map[i]) - 2)
